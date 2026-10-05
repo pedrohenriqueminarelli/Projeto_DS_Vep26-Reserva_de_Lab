@@ -13,7 +13,7 @@ class Usuario {
     static async inserirUsuario(Usuario) {
         try {
             const conexao = await conectaBD();
-            const result = await conexao.query(`INSERT into RSVLAB.usuario (email, senhaHash, cpf, nome, nascimento, celular) VALUES ('${Usuario.senhaHash}', ${Usuario.cpf}', ${Usuario.nome}', ${Usuario.nascimento}', ${Usuario.celular})`);
+            const result = await conexao.query(`INSERT into RSVLAB.usuario (email, senhaHash, cpf, nome, nascimento, celular) VALUES ('${Usuario.email}', '${Usuario.senhaHash}', '${Usuario.cpf}', '${Usuario.nome}', '${Usuario.nascimento}', ${Usuario.celular})`);
             return result.recordset;
         }
         catch (error) {
