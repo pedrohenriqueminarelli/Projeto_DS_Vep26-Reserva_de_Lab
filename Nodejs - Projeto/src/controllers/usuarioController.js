@@ -12,9 +12,6 @@ class usuarioController {
             res.status(500).json({message: `${error} - falha na requisição`});
         }
     }
-    static async inserirRecurso(req, res){
-        const novoRecurso = req.body;
-    }
 }
 
 export default usuarioController;

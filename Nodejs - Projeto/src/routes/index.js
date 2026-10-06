@@ -1,5 +1,6 @@
 import express from 'express';
 import usuario from './usuarioRoutes.js';
+import recurso from './recursoRoutes.js';
 
 const routes = (app) => {
     //route e uma função pronta que vem dentro do app do express
@@ -9,6 +10,7 @@ const routes = (app) => {
     app.route("/").get((req,res) => res.status(200).json({message: "API rodando"}));
 
     app.use(express.json(), usuario);
+    app.use(express.json(), recurso);
 }
 
 export default routes;
