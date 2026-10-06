@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
-body{
+body {
   padding: 20PX 10PX 30PX;
   max-width: 900;
+  background-color: var(--color-red-200);
   margin: 0 auto;
   color: var(--color-red-700);
   font-family: Arial, Helvetica, sans-serif;
