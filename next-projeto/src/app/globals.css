@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+body{
+  padding: 20PX 10PX 30PX;
+  max-width: 900;
+  margin: 0 auto;
+  color: var(--color-red-700);
+  font-family: Arial, Helvetica, sans-serif;
+}
