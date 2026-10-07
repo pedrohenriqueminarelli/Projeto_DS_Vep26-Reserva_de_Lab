@@ -1,4 +1,31 @@
+import { useState } from "react";
+interface DadosDoUsuario{
+    nome:string;
+    cpf:string;
+    email: string;
+    senha:string;
+    nascimento:string;
+    celular:string; 
+}
 export default function CadRecurso() {
+
+    const [dados, setDados]= useState<DadosDoUsuario>({
+        nome:"",
+        cpf: "",
+        email: "",
+        senha: "",
+        nascimento: "",
+        celular: "",
+});
+
+    function handleChange(event: React.ChangeEvent<HTMLInputElement>){
+        setDados({...dados,[event.target.name]:event.target.value});
+    }
+
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>){
+
+    }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-white">
         <div className="max-w-md mx-auto mt-10 p-6 bg-red-100 shadow-md rounded-md">
@@ -13,7 +40,10 @@ export default function CadRecurso() {
                 Nome completo:
                 <input className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
                     type="text"
-                    name="nome"/>
+                    name="nome"
+                    value={form.nome}
+                    onChange={handleChange}
+                    />
                 </label>
 
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -40,6 +70,12 @@ export default function CadRecurso() {
                 <input className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
                     type="number"
                     name="numero"/>
+                </label>
+                <label htmlFor="">
+                    CPF:
+                    <input type="number" className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
+                    name="cpf"
+                    />
                 </label>
                 <br></br>
                 <button type="submit" className="w-full bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 transition duration-200">
