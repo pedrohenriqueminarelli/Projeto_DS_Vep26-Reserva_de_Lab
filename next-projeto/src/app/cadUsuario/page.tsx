@@ -21,9 +21,15 @@ export default function CadRecurso() {
     function handleChange(event: React.ChangeEvent<HTMLInputElement>){
         setDados({...dados,[event.target.name]:event.target.value});
     }
-
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>){
-
+        await fetch("http://localhost:8080/usuarios",{
+            method:'POST',
+            headers:{'content-type':'application/json'},
+            body:JSON.stringify(dados)
+        }).then(dado=>{
+            if(!dado.ok) throw new Error("Erro ao conectar no BD");
+            alert("dados cadastrados com sucesso")
+        })
     }
 
   return (
