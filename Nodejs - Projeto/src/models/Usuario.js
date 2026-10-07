@@ -10,10 +10,21 @@ class Usuario {
         this.celular = celular;
     }
 
+    static async buscarTodos() {
+        try {
+            const conexao = await conectaBD();
+            const result = await conexao.query("SELECT * RSVLAB.usuario");
+            return result.recordset;
+        }
+        catch (error) {
+            throw new Error(`Erro na consulta ao BD: ${error}`);
+        }
+    }
+
     static async inserirUsuario(Usuario) {
         try {
             const conexao = await conectaBD();
-            const result = await conexao.query(`INSERT into RSVLAB.usuario (email, senhaHash, cpf, nome, nascimento, celular) VALUES ('${Usuario.email}', '${Usuario.senhaHash}', '${Usuario.cpf}', '${Usuario.nome}', '${Usuario.nascimento}', ${Usuario.celular})`);
+            const result = await conexao.query `INSERT into RSVLAB.usuario (email, senhaHash, cpf, nome, nascimento, celular) VALUES ('${Usuario.email}', '${Usuario.senhaHash}', '${Usuario.cpf}', '${Usuario.nome}', '${Usuario.nascimento}', ${Usuario.celular})`;
             return result.recordset;
         }
         catch (error) {
