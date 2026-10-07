@@ -4,7 +4,7 @@ class usuarioController {
 
     static async buscarTodos (req, res) {
         try {
-            const buscarTodos = await aluno.buscarTodos();
+            const buscarTodos = await usuario.buscarTodos();
             res.status(200).json(buscarTodos);
         }
         catch (error) {
