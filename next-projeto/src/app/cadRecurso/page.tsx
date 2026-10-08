@@ -75,7 +75,9 @@ export default function CadRecurso() {
                 <select className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
                     name="tipo"
                     value={dados.tipo}
-                    onChange={handleChange}>
+                    onChange={handleChange}
+                    required>
+                    <option value="" disabled>Selecione o tipo</option>
                     <option value="laboratorio">Laboratório</option>
                     <option value="sala">Sala</option>
                 </select>
