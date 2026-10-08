@@ -1,0 +1,16 @@
+LISTA DE AFAZERES
+
+SEGUNDA ENTREGA
+
+1 - REACT - Tela principal
+2 - REACT - Tela para reserva de recursos
+3 - REACT - Tela de consulta de reserva por data, usuário e recurso
+4 - NODE - Método para consulta de reserva por data, usuário e recurso
+
+TERCEIRA ENTREGA
+
+1 - REACT - Tela para login
+2 - NODE - Permissão de acordo com login
+3 - REACT - Tela para visualizar suas reserva
+4 - ADICIONAL/REACT - Formatação de CSS
+5 - ADICIONAL/REACT - Modo escuro
