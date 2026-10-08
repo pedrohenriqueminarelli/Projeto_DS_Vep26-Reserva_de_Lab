@@ -90,9 +90,10 @@ export default function Cadusuario() {
                     value={dados.celular}
                     onChange={handleChange}/>
                 </label>
-                <label htmlFor="">
+                <label className="mt-2 block text-sm font-medium text-gray-700">
                     CPF:
-                    <input type="text" className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
+                    <input className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
+                    type="text"
                     name="cpf"
                     value={dados.cpf}
                     onChange={handleChange}
