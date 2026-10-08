@@ -16,7 +16,7 @@ export default function Cadusuario() {
         email: "",
         senha: "",
         nascimento: "",
-        celular: "",
+        celular: ""
 });
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>){
@@ -27,10 +27,10 @@ export default function Cadusuario() {
         await fetch("http://localhost:8080/usuarios",{
             method:'POST',
             headers:{'content-type':'application/json'},
-            body:JSON.stringify({...dados, senhaHash: dados.senha})
+            body:JSON.stringify(dados)
         }).then(dado=>{
-            if(!dado.ok) throw new Error("Erro ao conectar no BD");
-            alert("dados cadastrados com sucesso");
+            if(!dado.ok) throw new Error("Erro ao conectar no BD!");
+            alert("dados cadastrados com sucesso!");
             setDados({nome:"", cpf:"",email:"", senha:"", nascimento:"", celular:"", });
         }).catch((erro)=>{
             alert("Erro no cadastro do usuário!");
