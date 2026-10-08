@@ -30,7 +30,7 @@ export default function Cadusuario() {
             body:JSON.stringify(dados)
         }).then(dado=>{
             if(!dado.ok) throw new Error("Erro ao conectar no BD!");
-            alert("dados cadastrados com sucesso!");
+            alert("Usuário cadastrado com sucesso!");
             setDados({nome:"", cpf:"",email:"", senha:"", nascimento:"", celular:"", });
         }).catch((erro)=>{
             alert("Erro no cadastro do usuário!");
