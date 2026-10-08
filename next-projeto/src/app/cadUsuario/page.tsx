@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 interface DadosDoUsuario{
     nome:string;
@@ -7,7 +8,7 @@ interface DadosDoUsuario{
     nascimento:string;
     celular:string; 
 }
-export default function CadRecurso() {
+export default function Cadusuario() {
 
     const [dados, setDados]= useState<DadosDoUsuario>({
         nome:"",
@@ -21,15 +22,19 @@ export default function CadRecurso() {
     function handleChange(event: React.ChangeEvent<HTMLInputElement>){
         setDados({...dados,[event.target.name]:event.target.value});
     }
-    async function handleSubmit(event: React.FormEvent<HTMLFormElement>){
+    async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>){
+        event.preventDefault();
         await fetch("http://localhost:8080/usuarios",{
             method:'POST',
             headers:{'content-type':'application/json'},
-            body:JSON.stringify(dados)
+            body:JSON.stringify({...dados, senhaHash: dados.senha})
         }).then(dado=>{
             if(!dado.ok) throw new Error("Erro ao conectar no BD");
-            alert("dados cadastrados com sucesso")
-        })
+            alert("dados cadastrados com sucesso");
+            setDados({nome:"", cpf:"",email:"", senha:"", nascimento:"", celular:"", });
+        }).catch((erro)=>{
+            alert("Erro no cadastro do usuário!");
+        });
     }
 
   return (
@@ -41,13 +46,13 @@ export default function CadRecurso() {
             Insira os dados de usuario!
             </div>
     
-        <form>
+        <form onSubmit={handleSubmit}>
             <label className="block text-sm font-medium text-gray-700 mb-2">
                 Nome completo:
                 <input className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
                     type="text"
                     name="nome"
-                    value={"form.nome"}
+                    value={dados.nome}
                     onChange={handleChange}
                     />
                 </label>
@@ -56,31 +61,41 @@ export default function CadRecurso() {
                 E-mail para contato:
                 <input className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
                     type="email"
-                    name="email"/>
+                    name="email"
+                    value={dados.email}
+                    onChange={handleChange}/>
                 </label>
 
                 <label className="block text-sm font-medium text-gray-700">
                 Senha:
                 <input className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
-                    type="text"
-                    name="senha"/>
+                    type="password"
+                    name="senha"
+                    value={dados.senha}
+                    onChange={handleChange}/>
                 </label>
                 <label className="mt-2 block text-sm font-medium text-gray-700">
                 Data de Nascimento:
                 <input className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
                     type="date"
-                    name="nascimento"/>
+                    name="nascimento"
+                    value={dados.nascimento}
+                    onChange={handleChange}/>
                 </label>
                 <label className="mt-2 block text-sm font-medium text-gray-700">
                 Número de celular:
                 <input className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
-                    type="number"
-                    name="numero"/>
+                    type="tel"
+                    name="celular"
+                    value={dados.celular}
+                    onChange={handleChange}/>
                 </label>
                 <label htmlFor="">
                     CPF:
-                    <input type="number" className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
+                    <input type="text" className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
                     name="cpf"
+                    value={dados.cpf}
+                    onChange={handleChange}
                     />
                 </label>
                 <br></br>
