@@ -1,8 +1,6 @@
 import express from 'express';
 import usuario from './usuarioRoutes.js';
 import recurso from './recursoRoutes.js';
-import cors from 'cors';
-import bodyParser from 'body-parser';
 
 const routes = (app) => {
     //route e uma função pronta que vem dentro do app do express
@@ -13,14 +11,6 @@ const routes = (app) => {
 
     app.use(express.json(), usuario);
     app.use(express.json(), recurso);
-
-    app.use(cors());
-
-    app.use(
-    bodyParser.urlencoded({
-        extended: true
-        })
-    )
 }
 
 export default routes;
