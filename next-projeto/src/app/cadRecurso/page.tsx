@@ -2,10 +2,10 @@
 
 import React, { useState } from "react";
 interface DadosDoRecurso{
-    nome: string;
-    capacidade: string;
+    nome:        string;
+    capacidade:  string;
     localizacao: string;
-    tipo: string;
+    tipo:        string;
 }
 export default function CadRecurso() {
 

@@ -1,12 +1,12 @@
 "use client";
 import { useState } from "react";
 interface DadosDoUsuario{
-    nome:string;
-    cpf:string;
-    email: string;
-    senha:string;
-    nascimento:string;
-    celular:string; 
+    nome:       string;
+    cpf:        string;
+    email:      string;
+    senha:      string;
+    nascimento: string;
+    celular:    string; 
 }
 export default function Cadusuario() {
 

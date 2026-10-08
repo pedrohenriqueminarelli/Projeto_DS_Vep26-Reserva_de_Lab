@@ -4,6 +4,7 @@ SEGUNDA ENTREGA
 
 1 - REACT - Tela principal
 2 - REACT - Tela para reserva de recursos
+5 - REACT - Tela para minhas reservas
 3 - REACT - Tela de consulta de reserva por data, usuário e recurso
 4 - NODE - Método para consulta de reserva por data, usuário e recurso
 

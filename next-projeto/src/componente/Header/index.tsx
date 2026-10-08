@@ -16,6 +16,12 @@ export function Header(){
             <Link href="/">Home</Link>
           </li>
           <li>
+            <Link href="/mReserva">Minhas Reservas</Link>
+          </li>
+          <li>
+            <Link href="/resRecurso">Reservar</Link>
+          </li>
+          <li>
             <Link href="/cadRecurso">Cadastrar Recurso</Link>
           </li>
           <li>
