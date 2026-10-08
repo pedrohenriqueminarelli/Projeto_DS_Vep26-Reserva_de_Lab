@@ -1,4 +1,5 @@
 import usuario from '../models/Usuario.js';
+
 class usuarioController {
 
     static async buscarTodos (req, res) {
