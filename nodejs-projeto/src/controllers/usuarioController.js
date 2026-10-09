@@ -19,7 +19,7 @@ class usuarioController {
             res.status(200).json({message: "Inserido com sucesso!"});
         }
         catch (error) {
-            res.status(500).json({message: `${error} - falha na requisição`});
+            res.status(500).json({message: `${error} - falha na requisição!`});
         }
     }
 }
