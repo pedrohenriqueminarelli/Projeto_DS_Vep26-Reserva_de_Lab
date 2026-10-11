@@ -14,6 +14,10 @@ class reservaController{
 
         const NovaReserva= req.body;
         try{
+            const conflito = await Reserva.verificadorDeConflito(NovaReserva);
+            if(conflito.length>0){
+                return res.status(409).json({message:"Já existe uma reserva feita nesse horário"})
+            }
             await Reserva.inserirReserva(NovaReserva);
             res.status(201).json({ message: "Reserva feita com sucesso!"})
         }catch(erro){

@@ -30,10 +30,19 @@ class Reserva{
     static async inserirReserva(reserva){
         try{
             const conexao= await conectaBD();
-        const result= await conexao.query`INSERT INTO RSVLAB.reserva (idUsuario, codStatus, codRecurso, dataInicial, dataFinal, horaInicial, horaFinal) values(${reserva.idUsuario}, ${reserva.codStatus}, ${reserva.codRecurso}, ${reserva.dataInicial}, ${reserva.dataFinal}, ${reserva.horaInicial}, ${reserva.horaFinal})`;
-        return result
+            const result= await conexao.query`INSERT INTO RSVLAB.reserva (idUsuario, codStatus, codRecurso, dataInicial, dataFinal, horaInicial, horaFinal) values(${reserva.idUsuario}, ${reserva.codStatus}, ${reserva.codRecurso}, ${reserva.dataInicial}, ${reserva.dataFinal}, ${reserva.horaInicial}, ${reserva.horaFinal})`;
+            return result
         }catch(erro){
             throw new Error(`Erro na consulta ao BD, ${erro}`)
+        }
+    }
+    static async verificadorDeConflito(reserva){
+        try{
+            const conexao = await conectaBD();
+            const result = await conexao.query`SELECT codreserva FROM RSVLAB.reserva WHERE codrecurso=${reserva.codrecurso} and horaInicial<${recurso.horaFinal} and horaFinal>${recurso.horaInicial} and dataInicial<=${recurso.dataFinal} and dataFinal>= ${reserva.dataInicial} `;
+            return result.recordset;
+        }catch(erro){
+            throw new Error(`Erro na consulta ao banco de dados - ${erro}`);
         }
     }
 }
