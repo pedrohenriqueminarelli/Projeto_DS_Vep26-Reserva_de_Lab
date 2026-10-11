@@ -14,12 +14,12 @@ class Reserva{
     static async buscarTodas(){
         try{
             const conexao= await conectaBD();
-            const result= await conexao.query(`SELECT codreserva, idusuario, codstatus, codrecurso,
+            const result= await conexao.query(`SELECT codreserva, idusuario,    codstatus, codrecurso,
             CONVERT(varchar(10), dataInicial, 103) AS dataInicial,
             CONVERT(varchar(10), dataFinal, 103)   AS dataFinal,
             CONVERT(varchar(5), horaInicial, 108)  AS horaInicial,
             CONVERT(varchar(5), horaFinal, 108)    AS horaFinal,
-            dtCriacao
+            FORMAT(dtCriacao, 'dd/MM/yyyy HH:mm')  AS dtCriacao
             FROM RSVLAB.reserva`);
             return result.recordset;
         }catch(erro){
