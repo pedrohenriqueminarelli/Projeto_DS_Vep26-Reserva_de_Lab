@@ -3,7 +3,7 @@ import reservaController from '../controllers/reservaController.js';
 
 const routes = express.Router();
 
-routes.get("/reserva", reservaController.buscarTodas);
-routes.post("/reserva", reservaController.inserirReserva);
+routes.get("/reservas", reservaController.buscarTodas);
+routes.post("/reservas", reservaController.inserirReserva);
 
 export default routes

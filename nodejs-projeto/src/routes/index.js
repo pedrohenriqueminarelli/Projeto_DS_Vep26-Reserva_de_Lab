@@ -1,6 +1,7 @@
 import express from 'express';
 import usuario from './usuarioRoutes.js';
 import recurso from './recursoRoutes.js';
+import reserva from './reservaRoutes.js';
 
 const routes = (app) => {
     //route e uma função pronta que vem dentro do app do express
@@ -11,6 +12,7 @@ const routes = (app) => {
 
     app.use(express.json(), usuario);
     app.use(express.json(), recurso);
+    app.use(express.json(), reserva)
 }
 
 export default routes;
