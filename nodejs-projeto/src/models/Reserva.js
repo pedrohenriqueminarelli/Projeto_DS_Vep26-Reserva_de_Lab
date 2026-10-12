@@ -39,7 +39,7 @@ class Reserva{
     static async verificadorDeConflito(reserva){
         try{
             const conexao = await conectaBD();
-            const result = await conexao.query`SELECT codreserva FROM RSVLAB.reserva WHERE codrecurso=${reserva.codrecurso} and horaInicial<${recurso.horaFinal} and horaFinal>${recurso.horaInicial} and dataInicial<=${recurso.dataFinal} and dataFinal>= ${reserva.dataInicial} `;
+            const result = await conexao.query`SELECT codReserva FROM RSVLAB.reserva WHERE codRecurso=${reserva.codRecurso} and horaInicial<${reserva.horaFinal} and horaFinal>${reserva.horaInicial} and dataInicial<=${reserva.dataFinal} and dataFinal>= ${reserva.dataInicial} `;
             return result.recordset;
         }catch(erro){
             throw new Error(`Erro na consulta ao banco de dados - ${erro}`);
