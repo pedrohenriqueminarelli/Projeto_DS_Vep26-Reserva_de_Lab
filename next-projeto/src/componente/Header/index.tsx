@@ -24,9 +24,6 @@ export function Header(){
           <li>
             <Link href="/cadRecurso">Cadastrar Recurso</Link>
           </li>
-          <li>
-            <Link href="/cadUsuario">Cadastrar Usuario</Link>
-          </li>
         </ul>
       </nav>
     </header>
