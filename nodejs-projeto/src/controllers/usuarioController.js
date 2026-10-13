@@ -13,6 +13,7 @@ class usuarioController {
     }
 
     static async inserirUsuario (req, res) {
+
         const usuarioNovo = req.body;
         try {
             await usuario.inserirUsuario(usuarioNovo);

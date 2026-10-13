@@ -1,4 +1,5 @@
 import conectaBD from "../config/dbConnect.js";
+import jwt from 'jsonwebtoken';
 import bcrypt from "bcryptjs";
 class Usuario {
     constructor(email, senhaHash, cpf, nome, nascimento, celular) {
@@ -23,7 +24,8 @@ class Usuario {
 
     static async inserirUsuario(usuario) {
         try {
-            const senhaHash = await bcrypt.hash(usuario.senha,10);
+            const salt = await bcrypt.genSalt(10);
+            const senhaHash = await bcrypt.hash(usuario.senha,salt);
             const conexao = await conectaBD();
             const result = await conexao.query `INSERT into RSVLAB.usuario (email, senhaHash, cpf, nome, nascimento, celular) VALUES (${usuario.email}, ${senhaHash}, ${usuario.cpf}, ${usuario.nome}, ${usuario.nascimento}, ${usuario.celular})`;
             return result.recordset;
