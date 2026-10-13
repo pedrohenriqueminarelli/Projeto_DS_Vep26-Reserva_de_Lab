@@ -13,7 +13,7 @@ export function Header(){
       <nav>
         <ul className="flex items-center justify-center gap-10 px-2 py-4">
           <li>
-            <Link href="/">Home</Link>
+            <Link href="/home">Home</Link>
           </li>
           <li>
             <Link href="/mReserva">Minhas Reservas</Link>
@@ -23,6 +23,9 @@ export function Header(){
           </li>
           <li>
             <Link href="/cadRecurso">Cadastrar Recurso</Link>
+          </li>
+          <li>
+            <Link href="/">sair</Link>
           </li>
         </ul>
       </nav>
