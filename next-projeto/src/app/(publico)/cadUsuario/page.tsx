@@ -54,6 +54,7 @@ export default function Cadusuario() {
                     name="nome"
                     value={dados.nome}
                     onChange={handleChange}
+                    required
                     />
                 </label>
 
@@ -63,7 +64,8 @@ export default function Cadusuario() {
                     type="email"
                     name="email"
                     value={dados.email}
-                    onChange={handleChange}/>
+                    onChange={handleChange}
+                    required/>
                 </label>
 
                 <label className="block text-sm font-medium text-gray-700">
@@ -72,7 +74,8 @@ export default function Cadusuario() {
                     type="password"
                     name="senha"
                     value={dados.senha}
-                    onChange={handleChange}/>
+                    onChange={handleChange}
+                    required/>
                 </label>
                 <label className="mt-2 block text-sm font-medium text-gray-700">
                 Data de Nascimento:
@@ -80,7 +83,8 @@ export default function Cadusuario() {
                     type="date"
                     name="nascimento"
                     value={dados.nascimento}
-                    onChange={handleChange}/>
+                    onChange={handleChange}
+                    required/>
                 </label>
                 <label className="mt-2 block text-sm font-medium text-gray-700">
                 Número de celular:
@@ -88,7 +92,8 @@ export default function Cadusuario() {
                     type="tel"
                     name="celular"
                     value={dados.celular}
-                    onChange={handleChange}/>
+                    onChange={handleChange}
+                    required/>
                 </label>
                 <label className="mt-2 block text-sm font-medium text-gray-700">
                     CPF:
@@ -97,6 +102,7 @@ export default function Cadusuario() {
                     name="cpf"
                     value={dados.cpf}
                     onChange={handleChange}
+                    required
                     />
                 </label>
                 <br></br>

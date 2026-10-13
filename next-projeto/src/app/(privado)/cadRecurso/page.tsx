@@ -50,7 +50,8 @@ export default function CadRecurso() {
                     type="text"
                     name="nome"
                     value={dados.nome}
-                    onChange={handleChange}/>
+                    onChange={handleChange}
+                    required/>
                 </label>
 
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -59,7 +60,8 @@ export default function CadRecurso() {
                     type="text"
                     name="capacidade"
                     value={dados.capacidade}
-                    onChange={handleChange}/>
+                    onChange={handleChange}
+                    required/>
                 </label>
 
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -68,7 +70,8 @@ export default function CadRecurso() {
                     type="text"
                     name="localizacao"
                     value={dados.localizacao}
-                    onChange={handleChange}/>
+                    onChange={handleChange}
+                    required/>
                 </label>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                 Tipo:
