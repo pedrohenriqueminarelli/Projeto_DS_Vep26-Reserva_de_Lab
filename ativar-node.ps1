@@ -4,7 +4,7 @@
 #
 # Como usar, em todo terminal novo, na pasta do repositorio:
 #   Set-ExecutionPolicy -Scope Process Bypass
-#   . .\ativar-node.ps1
+#  . ..\ativar-node.ps1
 
 $versao    = "v24.21.0"
 $destino   = "$env:USERPROFILE\node-portable"
