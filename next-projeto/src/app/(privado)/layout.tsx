@@ -1,4 +1,4 @@
-import { Header } from "../../componente/Header";
+import { Header } from "./componentesPrivados/Header";
 
 export default function LayoutPrivado({ children }: { children: React.ReactNode }) {
   return (

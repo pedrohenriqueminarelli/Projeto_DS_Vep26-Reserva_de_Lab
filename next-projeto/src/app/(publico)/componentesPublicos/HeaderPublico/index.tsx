@@ -6,7 +6,7 @@ export function HeaderPublico(){
       <div className="flex items-center justify-between w-full mx-auto max-w-3xl">
         <div className="flex px-2 py-4 text-white">
           <h1 className="text-center font-bold m-2 text-2xl">
-            Reservar uma sala ou laboratório nunca foi tão fácil
+            Reserva de Recursos
           </h1>
         </div>
       </div>
