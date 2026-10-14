@@ -13,6 +13,9 @@ export function HeaderPublico(){
       <nav>
         <ul className="flex items-center justify-center gap-10 px-2 py-4">
           <li>
+            <Link href="\">Informações</Link>
+          </li>
+          <li>
             <Link href="/login">login</Link>
           </li>
           <li>
