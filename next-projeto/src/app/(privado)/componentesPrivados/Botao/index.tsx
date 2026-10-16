@@ -1,11 +1,11 @@
 interface BotaoProps{
-    type?:string;
-    name:string;
+    type?:"submit"|"button"|"reset";
+    texto:string;
 
 }
 
-export function botao({type="submit", name}: BotaoProps){
+export function Botao({type="submit", texto}: BotaoProps){
     return(
-        <button {type}>{name}</button>
+        <button type={type} className="w-full bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 transition duration-200">{texto}</button>
     )
 }
