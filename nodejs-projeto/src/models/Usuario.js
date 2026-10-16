@@ -1,5 +1,4 @@
 import conectaBD from "../config/dbConnect.js";
-import jwt from 'jsonwebtoken';
 import bcrypt from "bcryptjs";
 class Usuario {
     constructor(email, senhaHash, cpf, nome, nascimento, celular) {

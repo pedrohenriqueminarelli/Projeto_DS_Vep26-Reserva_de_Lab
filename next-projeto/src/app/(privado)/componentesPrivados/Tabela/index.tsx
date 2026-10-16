@@ -1,10 +1,7 @@
 interface TabelaProps{
-    label: string;
-    value:string;
-    name:string ;
-    onChange: (event: React.ChangeEvent<HTMLTableElement>)=> void;
-    thead:{nomeDaColuna:string}[];
-    tbody:{ColunaQuePertence:string; texto:string}[];
+    titulo?:string;
+    coluna: {chave:string; titulo: string}[];
+    linhas:Record<string, string| number>[];
 }
 
 export function Tabela(){
