@@ -8,7 +8,7 @@ interface DadosDoRecurso{
     tipo:        string;
 }
 export default function CadRecurso() {
-
+    
     const [dados, setDados]= useState<DadosDoRecurso>({
         nome:"",
         capacidade:"",
