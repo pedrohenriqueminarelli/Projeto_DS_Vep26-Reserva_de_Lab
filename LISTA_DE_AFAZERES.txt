@@ -15,3 +15,4 @@ TERCEIRA ENTREGA
 3 - REACT - Tela para visualizar suas reserva
 4 - ADICIONAL/REACT - Formatação de CSS
 5 - ADICIONAL/REACT - Modo escuro
+6 - ADICIONAL/REACT - Administrar recursos para ADMIN
