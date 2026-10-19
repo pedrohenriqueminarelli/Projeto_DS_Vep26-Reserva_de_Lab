@@ -5,6 +5,6 @@ const routes = express.Router();
 
 routes.get("/usuarios", usuarioController.buscarTodos);
 routes.post("/usuarios", usuarioController.inserirUsuario);
-routes.get("/usuarios", usuarioController.buscarPorEmail)
+routes.post("/login", usuarioController.login)
 
 export default routes;

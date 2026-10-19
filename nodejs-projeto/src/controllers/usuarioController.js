@@ -1,16 +1,8 @@
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 import usuario from '../models/Usuario.js';
 
 class usuarioController {
-    static login = async(req, res)=>{
-        const {email, senhaHash} = req.body;
-        if(!email || !senha){
-            return res.status(400).json({message:"E-mail e senhas são obrigatórios."})
-        }
-        try{
-            const 
-        }
-    } 
     static async buscarTodos (req, res) {
         try {
             const buscarTodos = await usuario.buscarTodos();
@@ -32,9 +24,13 @@ class usuarioController {
             res.status(500).json({message: `${error} - falha na requisição!`});
         }
     }
-    static async buscarPorEmail(req, res){
+    static async login(req, res){
         try{
-            const EmailBuscado= await usuario.buscarPorEmail();
+            const EmailBuscado= await usuario.login(req.params.email);
+            if(!EmailBuscado){
+                return res.status(404).json({message:"usuario não encontrado" })
+            }
+
             await res.status(200).json(EmailBuscado);
         }
         catch(erro){

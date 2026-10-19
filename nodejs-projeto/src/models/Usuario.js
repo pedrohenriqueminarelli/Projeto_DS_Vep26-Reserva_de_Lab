@@ -33,10 +33,10 @@ class Usuario {
             throw new Error(`Erro na consulta ao BD: ${error}`);
         }
     }
-    static async buscarPorEmail(email){
+    static async login(email){
         try{
             const conexao= await conectaBD();
-            const result = await conexao.query`SELECT email, senhaHash FROM RSVLAB.usuario as u  WHERE u.email=${email}`;
+            const result = await conexao.query`SELECT email, senhaHash, idUsuario, nome, celular FROM RSVLAB.usuario as u  WHERE u.email=${email}`;
             return result.recordset[0];
         }
         catch(erro){
