@@ -2,6 +2,7 @@ import express from 'express';
 import usuario from './usuarioRoutes.js';
 import recurso from './recursoRoutes.js';
 import reserva from './reservaRoutes.js';
+import auth from './authRotes.js';
 
 const routes = (app) => {
     //route e uma função pronta que vem dentro do app do express
@@ -10,9 +11,10 @@ const routes = (app) => {
     //mesmo não usando o req, precisa colocalo como parâmetro, pois o servidor manda os dois como parâmetro primeiro o req e depois o res. Caso você não usar o (req,res) e usar (res) o req vai vir no lugar do res, pois o servidor sempre manda os dois nessa ordem.
     app.route("/").get((req,res) => res.status(200).json({message: "API rodando"}));
 
+    app.use(express.json(), auth);
     app.use(express.json(), usuario);
     app.use(express.json(), recurso);
-    app.use(express.json(), reserva)
+    app.use(express.json(), reserva);
 }
 
 export default routes;

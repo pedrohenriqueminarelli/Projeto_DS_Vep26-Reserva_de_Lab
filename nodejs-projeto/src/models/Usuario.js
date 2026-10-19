@@ -43,6 +43,15 @@ class Usuario {
             throw new Error(`Erro na consulta ao BD  ${erro}`)
         }
     }
+    static async registrarAcesso(idUsuario){
+        try{
+            const conexao= await conectaBD();
+            await conexao.query`INSERT INTO RSVLAB.ACESSO(idUsuario) VALUES (${idUsuario})`;
+            await conexao.query`UPDATE RSVLAB.usuario SET dataAcesso = SYSDATETIME() WHERE idUsuario = ${idUsuario}`;
+        }catch(erro){
+            throw new Error (`Erro ao registrar acesso: ${erro}`);
+        }
+    }
 }
 
 export default Usuario;

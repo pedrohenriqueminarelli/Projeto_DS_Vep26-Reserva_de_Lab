@@ -20,6 +20,9 @@ class AuthController{
         if (!senhaValida){
             return res.status(401).json({message:"E-mail ou senha inválidos"})
         } 
+
+        await Usuario.registrarAcesso(usuarioEncontrado.idUsuario);
+
         const secret = process.env.JWT_SECRET;
         const token = jwt.sign(
             {
