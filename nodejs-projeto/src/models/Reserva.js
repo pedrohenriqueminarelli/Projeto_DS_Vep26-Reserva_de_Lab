@@ -46,5 +46,8 @@ class Reserva{
             throw new Error(`Erro na consulta ao banco de dados - ${erro}`);
         }
     }
+    static async pegarOsDadosDaReserva(){
+        
+    }
 }
 export default Reserva;

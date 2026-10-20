@@ -1,14 +1,19 @@
-export default function todasAsReservas(){
-    interface Reservas{
-        codReserva: number;
-        codStatus: string;
-        idUsuario: number;
-        codRecurso: number;
+"use client";
+import { useState, useEffect } from "react";
+interface Reservas{
+        codReserva:  number;
+        codStatus:   string;
+        idUsuario:   number;
+        codRecurso:  number;
         dataInicial: string;
-        dataFinal: string;
-        horaFinal: string;
-        dtCrianção:string;
+        dataFinal:   string;
+        horaFinal:   string;
+        dtCrianção:  string;
     }
+export default function todasAsReservas(){
+
+    
+
     return(
         <div>
       <main className="flex flex-1 w-full max-w-4xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
