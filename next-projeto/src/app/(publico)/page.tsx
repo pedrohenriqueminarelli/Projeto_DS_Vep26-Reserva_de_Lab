@@ -17,9 +17,13 @@ export default function Home() {
           <h3>O que você pode fazer?</h3>
           <ul>
             <li>Home - Local onde fica as intruções e informações, caso você queira consultar novamente!</li>
+            <hr />
             <li>Minhas reservas - Consulte todas as suas reservas em um lugar só de forma prática e rápida.</li>
+            <hr />
             <li>Reservar - Faça a reserva de um laboratório ou sala, basta preencher as informações necessárias.</li>
+            <hr />
             <li>Cadastro de um novo recurso - Um novo recurso, é uma nova sala ou laboratório disponível para uso de todos. Essa funcionalidade só pode ser utilizada por pessoas autorizadas!</li>
+            <hr />
             <li>Sair - Saia da sua conta, caso queira usar uma outra conta.</li>
           </ul>
           </div>
