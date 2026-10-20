@@ -46,6 +46,7 @@ class Reserva{
             throw new Error(`Erro na consulta ao banco de dados - ${erro}`);
         }
     }
+<<<<<<< HEAD
 
     static async horaAtual(){
         try{
@@ -56,6 +57,10 @@ class Reserva{
         catch (error){
             throw new Error(`Erro na consulta ao BD: ${error}`)
         }
+=======
+    static async pegarOsDadosDaReserva(){
+        
+>>>>>>> eb8b39d639ce5683851702abe1a22d859c321d21
     }
 }
 export default Reserva;
