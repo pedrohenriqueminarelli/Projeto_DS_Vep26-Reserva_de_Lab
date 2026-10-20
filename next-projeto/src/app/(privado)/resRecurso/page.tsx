@@ -49,8 +49,8 @@ export default function reserva() {
     const [dadosRecurso, setDadosRecurso]= useState<DadosDoRecurso[]>([]);
 
     const [dadosReserva, setDadosReserva]= useState<DadosDaReserva>({
-        idUsuario:       "",
-        codStatus:  "Livre",
+        idUsuario:     "15",
+        codStatus:      "4",
         codRecurso:      "",
         dataInicial:     "",
         dataFinal:       "",
@@ -81,21 +81,27 @@ export default function reserva() {
       });
     }
 
-    async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>){
-            event.preventDefault();
-            await fetch("http://localhost:8080/reservas",{
-                method:"POST",
-                headers:{'content-type':'application/json'},
-                body:JSON.stringify(dadosReserva)
-            }).then(dado =>{
-                if(!dado.ok) throw new Error ("Erro ao conectar ao BD!");
-                alert("Reserva feita com sucesso!");
-                setDadosReserva({idUsuario:"", codStatus:"Livre", codRecurso:"", dataInicial:"", dataFinal:"", horaInicial:"", horaFinal:""});
-            }).catch((erro)=>{
-                alert("Erro ao conectar ao BD!");
-                console.log("Erro:",erro);
-            })
+    async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
+      event.preventDefault();
+      try {
+        const resp = await fetch("http://localhost:8080/reservas", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(dadosReserva),
+        });
+
+        if (!resp.ok) {
+          const corpo = await resp.text();
+          throw new Error(`HTTP ${resp.status} - ${corpo}`);
         }
+
+        alert("Reserva feita com sucesso!");
+        setDadosReserva({ idUsuario: "15", codStatus: "4", codRecurso: "", dataInicial: "", dataFinal: "", horaInicial: "", horaFinal: "" });
+      } catch (erro) {
+        console.error("Erro:", erro);
+        alert("Erro ao salvar a reserva: " + (erro as Error).message);
+      }
+    }
 
     useEffect(() => 
     {
@@ -140,7 +146,7 @@ export default function reserva() {
     const reservasDoRecurso = useMemo(
       () =>
         reservasExistentes.filter(
-          (r) => r.codRecurso === dadosReserva.codRecurso
+          (r) => String(r.codRecurso) === String(dadosReserva.codRecurso)
         ),
       [reservasExistentes, dadosReserva.codRecurso]
     );
