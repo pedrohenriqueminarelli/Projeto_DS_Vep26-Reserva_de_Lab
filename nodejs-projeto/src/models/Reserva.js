@@ -58,7 +58,8 @@ class Reserva{
     }
     static async pegarOsDadosDaReserva(){
         const conexao = await conectaBD();
-        const result = await conexao.query`SELECT codReserva, idUsuario, codStatus, codRecurso, dataInicial, dataFinal, horaInicial, horaFinal, rec.nome as NomeRecurso,  FROM `
+        const result = await conexao.query`SELECT codReserva, idUsuario, codStatus, codRecurso, dataInicial, dataFinal, horaInicial, horaFinal, rec.nome as NomeRecurso, r.codrecurso FROM RSVLAB.recusro as rec RSVLAB.codrecurso as r 
+        INNER JOIN `
     }
 }
 export default Reserva;
