@@ -2,26 +2,26 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 interface DadosDaReserva{
-    idUsuario:   string;
-    codStatus:   string;
-    codRecurso:  string;
-    dataInicial: string;
-    dataFinal:   string;
-    horaInicial: string;
-    horaFinal:   string;
+    idUsuario:          string;
+    codStatus:          string;
+    codRecurso:         string;
+    dataInicial:        string;
+    dataFinal:          string;
+    horaInicial:        string;
+    horaFinal:          string;
 }
 
 interface DadosDoRecurso{
-  codRecurso:    string;
-  nome:          string;
+  codRecurso:           string;
+  nome:                 string;
 }
 
 interface ReservaExistente {
-  codRecurso:    string;
-  dataInicial:   string;
-  dataFinal:     string;
-  horaInicial:   string;
-  horaFinal:     string;
+  codrecurso:  number | string;
+  dataInicial:          string;
+  dataFinal:            string;
+  horaInicial:          string;
+  horaFinal:            string;
 }
 
 const intervalo = 45; // minutos entre cada horário
@@ -38,8 +38,24 @@ function gerarHorarios(): string[] {
   return lista;
 }
 
-function paraMinutos(data: string, hora: string): number {
-  return new Date(`${data}T${hora.slice(0, 5)}:00`).getTime() / 60000;
+function paraMinutos(data: unknown, hora: unknown): number {
+  let ano = 0, mes = 0, dia = 0, h = 0, m = 0;
+
+  if (Array.isArray(data)) {
+    [ano, mes, dia] = data.map(Number);
+  } else {
+    const p = String(data ?? "").slice(0, 10).replace(/\//g, "-").split("-").map(Number);
+    if (p[0] > 31) [ano, mes, dia] = p; // veio AAAA-MM-DD
+    else [dia, mes, ano] = p;           // veio DD-MM-AAAA
+  }
+
+  if (Array.isArray(hora)) {
+    [h, m] = hora.map(Number);
+  } else {
+    [h, m] = String(hora ?? "").split(":").map(Number);
+  }
+
+  return Date.UTC(ano, mes - 1, dia, h, m) / 60000; // NaN se algo estiver inválido
 }
 
 export default function reserva() {
@@ -94,7 +110,6 @@ export default function reserva() {
           const corpo = await resp.text();
           throw new Error(`HTTP ${resp.status} - ${corpo}`);
         }
-
         alert("Reserva feita com sucesso!");
         setDadosReserva({ idUsuario: "15", codStatus: "4", codRecurso: "", dataInicial: "", dataFinal: "", horaInicial: "", horaFinal: "" });
       } catch (erro) {
@@ -143,13 +158,15 @@ export default function reserva() {
       carregarReservas();
     }, []);
 
-    const reservasDoRecurso = useMemo(
-      () =>
-        reservasExistentes.filter(
-          (r) => String(r.codRecurso) === String(dadosReserva.codRecurso)
-        ),
-      [reservasExistentes, dadosReserva.codRecurso]
-    );
+    const reservasDoRecurso = useMemo(() => {
+      return reservasExistentes
+        .filter((r) => String(r.codrecurso) === String(dadosReserva.codRecurso))
+        .map((r) => ({
+          ini: paraMinutos(r.dataInicial, r.horaInicial),
+          fim: paraMinutos(r.dataFinal, r.horaFinal),
+        }))
+        .filter((r) => !Number.isNaN(r.ini) && !Number.isNaN(r.fim));
+    }, [reservasExistentes, dadosReserva.codRecurso]);
 
     const horariosIniciaisDisponiveis = useMemo(() => {
       if (!dadosReserva.codRecurso || !dadosReserva.dataInicial) return [];
@@ -157,39 +174,33 @@ export default function reserva() {
       return horarios.filter((hora) => {
         const slot = paraMinutos(dadosReserva.dataInicial, hora);
 
-        return reservasDoRecurso.every((r) => {
-          const inicio = paraMinutos(r.dataInicial, r.horaInicial);
-          const fim = paraMinutos(r.dataFinal, r.horaFinal);
+        // ocupado se o horário cai dentro de [início - margem, fim + margem]
+        const ocupado = reservasDoRecurso.some(
+          (r) => slot > r.ini - margem && slot < r.fim + margem
+        );
 
-          // válido se estiver ANTES do início (com folga) ou DEPOIS do fim (com folga)
-          return slot + margem <= inicio || slot >= fim + margem;
-        });
+        return !ocupado;
       });
     }, [reservasDoRecurso, dadosReserva.codRecurso, dadosReserva.dataInicial]);
 
     const horariosFinaisDisponiveis = useMemo(() => {
       const { codRecurso, dataInicial, dataFinal, horaInicial } = dadosReserva;
-
       if (!codRecurso || !dataInicial || !dataFinal || !horaInicial) return [];
 
-      const inicioNova = paraMinutos(dataInicial, horaInicial);
+      const iniNova = paraMinutos(dataInicial, horaInicial);
 
       return horarios.filter((hora) => {
         const fimNova = paraMinutos(dataFinal, hora);
+        if (fimNova <= iniNova) return false;
 
-        // o fim precisa ser depois do início
-        if (fimNova <= inicioNova) return false;
+        // conflito se os intervalos (com margem) se sobrepõem
+        const conflito = reservasDoRecurso.some(
+          (r) => iniNova < r.fim + margem && fimNova > r.ini
+        );
 
-        // e o intervalo inteiro não pode encostar em nenhuma reserva existente
-        return reservasDoRecurso.every((r) => {
-          const inicio = paraMinutos(r.dataInicial, r.horaInicial);
-          const fim = paraMinutos(r.dataFinal, r.horaFinal);
-
-          // termina antes da reserva (com folga) OU começa depois dela (com folga)
-          return fimNova + margem <= inicio || inicioNova >= fim + margem;
-        });
+        return !conflito;
       });
-    }, [reservasDoRecurso, dadosReserva.codRecurso, dadosReserva.dataInicial, dadosReserva.dataFinal, dadosReserva.horaInicial,]);
+    }, [reservasDoRecurso, dadosReserva.codRecurso, dadosReserva.dataInicial, dadosReserva.dataFinal, dadosReserva.horaInicial]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white">
