@@ -20,7 +20,7 @@ export function Tabela({titulo, colunas, linhas}:TabelaProps){
                         linhas.map((linha, indice)=>(
                              <tr key={indice}>
                                 {colunas.map((info)=>(
-                                    <td key={info.chave}>{linha[info.chave ]}</td>
+                                    <td key={info.chave}>{linha[info.chave]}</td>
                                 ))}
                                  </tr>
                         ))
