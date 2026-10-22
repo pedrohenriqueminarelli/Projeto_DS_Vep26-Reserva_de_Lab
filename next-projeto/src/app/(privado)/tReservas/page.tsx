@@ -3,26 +3,18 @@ import { Tabela } from "../componentesPrivados/Tabela";
 import { Select } from "../componentesPrivados/Select";
 import { useState, useEffect } from "react";
 interface Reservas{
-        codReserva:  number;
-        idUsuario:   number;
-        codStatus:   number;
-        codRecurso:  number;
-        dataInicial: string;
-        dataFinal:   string;
-        horaInicial: string;
-        horaFinal:   string;
-        dtCrianção:  string;
-    }
-interface ReservasFormatadas{
-        nomeDaReserva:string;
-        nomeUsuario:string;
-        nomeStatus: string;
-        NomeRecurso:string;
-        dataInicial: string;
-        dataFinal:   string;
-        horaInicial: string;
-        horaFinal:   string;
-        dtCrianção:  string;
+    codReserva: number; 
+    idUsuario: number;
+    codStatus: number;
+    codRecurso: number;
+    nomeUsuario: string
+    nomeRecurso:string;
+    nomeStatus: string;
+    dataInicial: string;
+    dataFinal: string;
+    horaInicial: string;
+    horaFinal: string;
+    dtCriacao: string;
 }
      const API= "http://localhost:8080"
 
@@ -39,16 +31,19 @@ export default function todasAsReservas(){
       fetch(`${API}/status`).then((resultado)=> resultado.json()).then((dados)=>setStatus(dados));
     },[])
 
-    const [dados, setdados] = useState<ReservasFormatadas>({
-        nomeDaReserva:"",
+    const [dados, setdados] = useState<Reservas>({
+        codReserva: 0,
+        idUsuario: 0,
+        codStatus: 0,
+        codRecurso: 0,
         nomeUsuario: "",
+        nomeRecurso:"",
         nomeStatus: "",
-        NomeRecurso:"",
         dataInicial: "",
-        dataFinal:   "",
+        dataFinal: "",
         horaInicial: "",
-        horaFinal:   "",
-        dtCrianção: ""
+        horaFinal: "",
+        dtCriacao: ""
     })
 
     return(

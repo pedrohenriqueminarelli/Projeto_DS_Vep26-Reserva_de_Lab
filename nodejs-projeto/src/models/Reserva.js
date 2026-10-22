@@ -67,9 +67,15 @@ class Reserva{
         }
     }
     static async pegarOsDadosDaReserva(){
+        try{
         const conexao = await conectaBD();
-        const result = await conexao.query`SELECT codReserva, idUsuario, codStatus, codRecurso, dataInicial, dataFinal, horaInicial, horaFinal, rec.nome as NomeRecurso, r.codrecurso FROM RSVLAB.recusro as rec RSVLAB.codrecurso as r 
-        INNER JOIN `
+        const result = await conexao.query`SELECT r.codReserva, r.idUsuario, r.codStatus, r.codRecurso, u.nome   AS nomeUsuario, rec.nome AS nomeRecurso, s.nome   AS nomeStatus, CONVERT(varchar(10), r.dataInicial, 103) AS dataInicial, CONVERT(varchar(10), r.dataFinal, 103)   AS dataFinal, CONVERT(varchar(5),  r.horaInicial, 108) AS horaInicial, CONVERT(varchar(5),  r.horaFinal, 108)   AS horaFinal, FORMAT(r.dtCriacao, 'dd/MM/yyyy HH:mm')  AS dtCriacao FROM RSVLAB.reserva AS r INNER JOIN RSVLAB.usuario AS u   ON u.idusuario    = r.idusuario INNER JOIN RSVLAB.recurso AS rec ON rec.codRecurso = r.codrecurso INNER JOIN RSVLAB.status  AS s   ON s.codstatus    = r.codstatus`
+        return result.recordset
+        }
+        catch(erro){
+            throw new Error(`Erro na consulta ao BD, ${erro}`)
+        }
     }
+    
 }
 export default Reserva;
