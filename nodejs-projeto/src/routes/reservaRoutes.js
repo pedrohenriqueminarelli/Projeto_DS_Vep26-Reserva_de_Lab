@@ -5,5 +5,6 @@ const routes = express.Router();
 
 routes.get("/reservas", reservaController.buscarTodas);
 routes.post("/reservas", reservaController.inserirReserva);
+routes.get("/hora", reservaController.buscarHorario);
 
 export default routes

@@ -49,11 +49,21 @@ class Reserva{
     static async horaAtual(){
         try{
             const conexao = await conectaBD();
-            const result = await conexao.query`SELECT FORMAT(GETDADE(), 'yyyy-MM-dd') AS data, FORMAT(GETDATE(), 'HH:mm') AS hora`;
+            const result = await conexao.query`SELECT FORMAT(GETDATE(), 'yyyy-MM-dd') AS data, FORMAT(GETDATE(), 'HH:mm') AS hora`;
             return result.recordset[0];
         }
-        catch (error){
-            throw new Error(`Erro na consulta ao BD: ${error}`)
+        catch (erro){
+            throw new Error(`Erro na consulta ao BD, ${erro}`)
+        }
+    }
+    static async verificaOcorrenciaDeTempo(reserva){
+        try{
+            const conexao = await conectaBD();
+            const result = await conexao.query`SELECT CASE WHEN CONVERT(DATETIME, ${reserva.dataInicial} + 'T' + ${reserva.horaInicial}, 126) <= GETDATE() THEN 1 ELSE 0 END AS passado`;
+            return result.recordset[0];
+        }
+        catch(erro){
+            throw new Error(`Erro na consulta ao BD, ${erro}`)
         }
     }
     static async pegarOsDadosDaReserva(){

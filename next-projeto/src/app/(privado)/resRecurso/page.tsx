@@ -16,6 +16,11 @@ interface DadosDoRecurso{
   nome:                 string;
 }
 
+interface HoraServidor {
+  data:                 string;
+  hora:                 string;
+}
+
 interface ReservaExistente {
   codrecurso:  number | string;
   dataInicial:          string;
@@ -61,6 +66,8 @@ function paraMinutos(data: unknown, hora: unknown): number {
 export default function reserva() {
 
     const [reservasExistentes, setReservasExistentes] = useState<ReservaExistente[]>([]);
+
+    const [agora, setAgora] = useState<HoraServidor | null>(null);
 
     const [dadosRecurso, setDadosRecurso]= useState<DadosDoRecurso[]>([]);
 
@@ -118,6 +125,17 @@ export default function reserva() {
       }
     }
 
+    async function carregarHora() {
+      try {
+        const response = await fetch("http://localhost:8080/hora");
+        if (!response.ok) throw new Error("Erro ao buscar a hora do servidor");
+        const resultado: HoraServidor = await response.json();
+        setAgora(resultado);
+      } catch (erro) {
+        console.error("Erro do processamento", erro);
+      }
+    }
+
     useEffect(() => 
     {
       async function carregarDadosDosRecursos()
@@ -139,10 +157,17 @@ export default function reserva() {
         }
       }   // end da function 
 
+
       // fazendo chamada da função que vai carregar os dados
       // dos alunos na página
       carregarDadosDosRecursos();
     }, []);
+
+    useEffect(() => {
+      carregarHora();
+      const id = setInterval(carregarHora, 60000); // atualiza a cada minuto
+      return () => clearInterval(id);
+    })
 
     useEffect(() => {
       async function carregarReservas() {
@@ -168,13 +193,20 @@ export default function reserva() {
         .filter((r) => !Number.isNaN(r.ini) && !Number.isNaN(r.fim));
     }, [reservasExistentes, dadosReserva.codRecurso]);
 
+    const agoraEmMinutos = useMemo(
+      () => (agora ? paraMinutos(agora.data, agora.hora) : null),
+      [agora]
+    );
+
     const horariosIniciaisDisponiveis = useMemo(() => {
       if (!dadosReserva.codRecurso || !dadosReserva.dataInicial) return [];
+      if (agoraEmMinutos === null) return [];
 
       return horarios.filter((hora) => {
         const slot = paraMinutos(dadosReserva.dataInicial, hora);
 
-        // ocupado se o horário cai dentro de [início - margem, fim + margem]
+        if (slot<=agoraEmMinutos) return false;
+
         const ocupado = reservasDoRecurso.some(
           (r) => slot > r.ini - margem && slot < r.fim + margem
         );
@@ -234,6 +266,7 @@ export default function reserva() {
               <input className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
                   type="date"
                   name="dataInicial"
+                  min={agora?.data}
                   value={dadosReserva.dataInicial}
                   onChange={handleChange}
                   required/>
@@ -244,7 +277,7 @@ export default function reserva() {
               <input className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
                   type="date"
                   name="dataFinal"
-                  min={dadosReserva.dataInicial}
+                  min={dadosReserva.dataInicial || agora?.data}
                   value={dadosReserva.dataFinal}
                   onChange={handleChange}
                   required/>
@@ -259,7 +292,9 @@ export default function reserva() {
                   disabled={!dadosReserva.codRecurso || !dadosReserva.dataInicial}
                   required>
                   <option value="" disabled>
-                    {!dadosReserva.codRecurso || !dadosReserva.dataInicial
+                    {!agora
+                      ? "Carregando horário do servidor..."
+                      : !dadosReserva.codRecurso || !dadosReserva.dataInicial
                       ? "Escolha o recurso e a data primeiro"
                       : horariosIniciaisDisponiveis.length === 0
                       ? "Nenhum horário disponível"
