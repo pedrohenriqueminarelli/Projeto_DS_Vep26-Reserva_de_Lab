@@ -9,7 +9,7 @@ type Reservas = {
     codStatus: number;
     codRecurso:number;
     codReserva:number;
-    nomeUsuario: string
+    nomeUsuario: string;
     nomeRecurso:string;
     nomeStatus: string;
     dataInicial: string;
@@ -33,21 +33,6 @@ export default function todasAsReservas(){
       fetch(`${API}/recursos`).then((resultado)=> resultado.json()).then((dados)=> setRecurso(dados));
       fetch(`${API}/status`).then((resultado)=> resultado.json()).then((dados)=>setStatus(dados));
     },[])
-
-    const [dados, setdados] = useState<Reservas>({
-        idUsuario: 0,
-        codStatus:0,
-        codRecurso:0,
-        codReserva:0,
-        nomeUsuario: "",
-        nomeRecurso:"",
-        nomeStatus: "",
-        dataInicial: "",
-        dataFinal: "",
-        horaInicial: "",
-        horaFinal: "",
-        dtCriacao: ""
-    })
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>){
       setFiltros({...filtros, [event.target.name]:event.target.value});
