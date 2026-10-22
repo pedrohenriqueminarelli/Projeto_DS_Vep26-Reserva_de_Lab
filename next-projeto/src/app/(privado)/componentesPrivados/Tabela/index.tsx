@@ -7,11 +7,11 @@ export function Tabela({titulo, colunas, linhas}:TabelaProps){
     return(
         <div>
             <h1>{titulo}</h1>
-            <table>
+            <table >
                 <thead>
                     {
                         colunas.map((info)=>{
-                            return <tr><th key={info.chave}>{info.titulo}</th></tr>
+                            return <th key={info.chave}>{info.titulo}</th>
                         })
                     }
                 </thead>

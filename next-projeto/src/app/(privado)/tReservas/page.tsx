@@ -1,12 +1,14 @@
 "use client";
 import { Tabela } from "../componentesPrivados/Tabela";
 import { Select } from "../componentesPrivados/Select";
+import { Campo } from "../componentesPrivados/Campo";
+import { Botao } from "../componentesPrivados/Botao";
 import { useState, useEffect } from "react";
-interface Reservas{
-    codReserva: number; 
+type Reservas = {
     idUsuario: number;
     codStatus: number;
-    codRecurso: number;
+    codRecurso:number;
+    codReserva:number;
     nomeUsuario: string
     nomeRecurso:string;
     nomeStatus: string;
@@ -25,17 +27,18 @@ export default function todasAsReservas(){
     const [reservas, setReservas] = useState<Reservas[]>([]);
     const [recurso, setRecurso] = useState<Recurso[]>([]);
     const [status, setStatus] = useState<Status[]>([]);
+    const [filtros, setFiltros] = useState({codRecurso: "", codStatus: "",data: "" });
     useEffect(()=>{
-      fetch(`${API}/reservas`).then((resultado)=> resultado.json()).then((dados)=> setReservas(dados));
+      fetch(`${API}/reservas/detalhadas`).then((resultado)=> resultado.json()).then((dados)=> setReservas(dados));
       fetch(`${API}/recursos`).then((resultado)=> resultado.json()).then((dados)=> setRecurso(dados));
       fetch(`${API}/status`).then((resultado)=> resultado.json()).then((dados)=>setStatus(dados));
     },[])
 
     const [dados, setdados] = useState<Reservas>({
-        codReserva: 0,
         idUsuario: 0,
-        codStatus: 0,
-        codRecurso: 0,
+        codStatus:0,
+        codRecurso:0,
+        codReserva:0,
         nomeUsuario: "",
         nomeRecurso:"",
         nomeStatus: "",
@@ -46,6 +49,23 @@ export default function todasAsReservas(){
         dtCriacao: ""
     })
 
+    function handleChange(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>){
+      setFiltros({...filtros, [event.target.name]:event.target.value});
+    }
+    function limparfiltros(){
+      setFiltros({codRecurso: "", codStatus: "",data: "" });
+    }
+    function paraISO(data: string) {
+        const [dia, mes, ano] = data.split("/");
+        return `${ano}-${mes}-${dia}`;
+    }
+    const reservasFiltradas = reservas.filter((r) => {
+        if (filtros.codRecurso && String(r.codRecurso) !== filtros.codRecurso) return false;
+        if (filtros.codStatus && String(r.codStatus) !== filtros.codStatus) return false;
+        if (filtros.data && (paraISO(r.dataInicial) > filtros.data || paraISO(r.dataFinal) < filtros.data)) return false;
+        return true;
+    });
+
     return(
         <div>
       <main className="flex flex-1 w-full max-w-4xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
@@ -55,11 +75,49 @@ export default function todasAsReservas(){
             </h1>
           <div className="grid gap-4 sm:grid-cols-4 items-end">
             <Select 
-            label="Recurso"
+            label="Escolha o recurso que deseja buscar!"
             name="codRecurso"
-            value=""
+            value={filtros.codRecurso}
+            onChange={handleChange}
+            opcoes={recurso.map((r)=>({valor: String(r.codRecurso), texto: r.nome}))}
+            textOption="Selecione o recurso! "
+            />
+            <Select
+            label="Escolha o status da Reserva"
+            name="codStatus"
+            value={filtros.codStatus}
+            onChange={handleChange}
+            opcoes={status.map((s)=>({valor:String(s.codstatus),texto: s.nome}))}
+            textOption="Selecione o Status!"
+            />
+            <Campo
+            label="Data:"
+            name="data"
+            value={filtros.data}
+            onChange={handleChange}
+            type="date"
+            />
+            <Botao
+            type="submit"
+            texto="Limpar filtros"
+            onClick={limparfiltros}
             />
             </div>
+            <Tabela
+            colunas={[
+                {chave: "codReserva", titulo: "Reserva"},
+                {chave: "idUsuario", titulo: "Id usuário"},
+                {chave:"nomeUsuario", titulo: "Nome"},
+                {chave:"nomeRecurso", titulo: "Recurso"},
+                {chave:"nomeStatus", titulo:"Status"},
+                {chave:"dataInicial", titulo:"Início"},
+                {chave:"dataFinal", titulo:"fim"},
+                {chave:"horaInicial", titulo:"Das"},
+                {chave:"horaFinal", titulo:"Até"},
+                {chave: "dtCriacao", titulo:"Reservada"},
+            ]}
+            linhas={reservasFiltradas}
+            />
           </div>
         </main>
     </div>
