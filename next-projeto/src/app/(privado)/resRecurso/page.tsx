@@ -50,8 +50,8 @@ function paraMinutos(data: unknown, hora: unknown): number {
     [ano, mes, dia] = data.map(Number);
   } else {
     const p = String(data ?? "").slice(0, 10).replace(/\//g, "-").split("-").map(Number);
-    if (p[0] > 31) [ano, mes, dia] = p; // veio AAAA-MM-DD
-    else [dia, mes, ano] = p;           // veio DD-MM-AAAA
+    if (p[0] > 31) [ano, mes, dia] = p;
+    else [dia, mes, ano] = p;
   }
 
   if (Array.isArray(hora)) {
@@ -60,7 +60,7 @@ function paraMinutos(data: unknown, hora: unknown): number {
     [h, m] = String(hora ?? "").split(":").map(Number);
   }
 
-  return Date.UTC(ano, mes - 1, dia, h, m) / 60000; // NaN se algo estiver inválido
+  return Date.UTC(ano, mes - 1, dia, h, m) / 60000;
 }
 
 export default function reserva() {
@@ -125,7 +125,8 @@ export default function reserva() {
       }
     }
 
-    async function carregarHora() {
+    async function carregarHora()
+    {
       try {
         const response = await fetch("http://localhost:8080/hora");
         if (!response.ok) throw new Error("Erro ao buscar a hora do servidor");
@@ -155,11 +156,8 @@ export default function reserva() {
         {
           console.error("Erro do processamento",erro);
         }
-      }   // end da function 
+      }
 
-
-      // fazendo chamada da função que vai carregar os dados
-      // dos alunos na página
       carregarDadosDosRecursos();
     }, []);
 
