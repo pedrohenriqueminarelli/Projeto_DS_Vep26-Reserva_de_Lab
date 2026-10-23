@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+body {
+  padding: 30PX 10PX 30PX;
+  max-width: 95%;
+  background-color:rgb(47, 52, 59);
+  margin: 0 auto;
+  color:rgb(78, 121, 201, 0.8);
+  font-family: cursive;
+}

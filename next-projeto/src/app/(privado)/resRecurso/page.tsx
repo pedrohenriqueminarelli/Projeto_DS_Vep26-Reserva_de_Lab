@@ -235,7 +235,7 @@ export default function reserva() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="max-w-md mx-auto mt-10 p-6 bg-red-100 shadow-md rounded-md">
+        <div className="mx-auto mt-10 p-6 bg-red-100 shadow-md rounded-md">
         <h2 className="text-2xl font-semibold mb-2">Reserva de Recurso</h2>
 
             <div className="font-medium mb-4">
