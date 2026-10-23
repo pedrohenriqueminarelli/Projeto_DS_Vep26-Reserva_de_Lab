@@ -76,7 +76,7 @@ class Reserva{
             throw new Error(`Erro na consulta ao BD, ${erro}`)
         }
     }
-    static async pegarOsdadosDeUmUsuario(id){
+    static async pegarAsMinhasReservas(id){
         try{
             const conexao = await conectaBD();
             const result = await conexao.query`SELECT r.codReserva, r.idUsuario, r.codStatus, r.codRecurso, u.nome   AS nomeUsuario, rec.nome AS nomeRecurso, s.nome   AS nomeStatus, CONVERT(varchar(10), r.dataInicial, 103) AS dataInicial, CONVERT(varchar(10), r.dataFinal, 103)   AS dataFinal, CONVERT(varchar(5),  r.horaInicial, 108) AS horaInicial, CONVERT(varchar(5),  r.horaFinal, 108)   AS horaFinal, FORMAT(r.dtCriacao, 'dd/MM/yyyy HH:mm')  AS dtCriacao FROM RSVLAB.reserva AS r INNER JOIN RSVLAB.usuario AS u   ON u.idusuario    = r.idusuario INNER JOIN RSVLAB.recurso AS rec ON rec.codRecurso = r.codrecurso INNER JOIN RSVLAB.status  AS s   ON s.codstatus    = r.codstatus WHERE u.idUsuario=${id}`

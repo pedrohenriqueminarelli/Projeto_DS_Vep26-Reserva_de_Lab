@@ -46,5 +46,13 @@ class reservaController{
             res.status(500).json({message: `${erro} - Falha na requisição!`})
         }
     }
+    static async pegarAsMinhasReservas(req, res){
+        try{
+            const MinhasReservas = await Reserva.pegarAsMinhasReservas();
+            res.status(200).json(MinhasReservas);
+        }catch(erro){
+            res.status(500).json({message: `${erro} - Falha na Requisição!`})
+        }
+    }
 }
 export default reservaController;
