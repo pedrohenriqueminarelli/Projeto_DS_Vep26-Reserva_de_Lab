@@ -2,8 +2,10 @@
 import { useState } from "react";
 import { Campo } from "../../(privado)/componentesPrivados/Campo";
 import { Botao } from "../../(privado)/componentesPrivados/Botao";
+import { useRouter } from "next/navigation";
 export default function Login(){ 
 
+    const router = useRouter();
     const [dados, setDados] = useState ({email:"", senha:""});
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>){
@@ -12,18 +14,23 @@ export default function Login(){
     
     async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>){
         event.preventDefault();
-        await fetch("http://localhost:8080/auth/login",{
+        try{
+            const resposta = await fetch("http://localhost:8080/auth/login",{
             method:"POST",
-            headers:{'content-type':'application/json'},
+            headers:{'Content-Type': 'application/json'},
             body:JSON.stringify(dados)
-        }).then(resultado=>{
-            if(!resultado.ok){
-                alert("falha ao se conectar")
-                return
-            }else{}
-        }).catch((erro)=>{
-            alert("Erro ao conectar ao BD")
         })
+        const resultado = await resposta.json();
+        if(!resposta.ok){
+            alert(resultado.massage)
+            return
+        }else{
+            localStorage.setItem("token", resultado.token);
+            router.push("/home");
+        }
+        }catch(erro){
+            alert("Erro ao conectar ao BD")
+        }
     }
 
      return (
@@ -41,7 +48,7 @@ export default function Login(){
                 name="email"
                 value={dados.email}
                 onChange={handleChange}
-                type="text"
+                type="email"
                 />
                 <Campo 
                 label="Senha:"
