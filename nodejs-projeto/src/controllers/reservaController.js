@@ -48,7 +48,7 @@ class reservaController{
     }
     static async pegarAsMinhasReservas(req, res){
         try{
-            const MinhasReservas = await Reserva.pegarAsMinhasReservas();
+            const MinhasReservas = await Reserva.pegarAsMinhasReservas(req.params.id);
             res.status(200).json(MinhasReservas);
         }catch(erro){
             res.status(500).json({message: `${erro} - Falha na Requisição!`})
