@@ -19,8 +19,9 @@ type Reservas = {
 export default function reserva() {
       const [reserva, setReserva] = useState<Reservas[]>([]);
 
+      const id = 15
       useEffect(()=>{
-        fetch(`${API}/detalhadas`).then((resultado)=> resultado.json()).then((dados)=> setReserva(dados));
+        fetch(`${API}/reservas/${id}`).then((resultado)=> resultado.json()).then((dados)=> setReserva(dados));
       },[])
   return (
     <div>
@@ -30,7 +31,22 @@ export default function reserva() {
               Minhas reservas!
             </h1>
           </div>
-          
+          <Tabela
+          colunas={[
+            {chave: "codReserva", titulo: "Reserva"},
+            {chave: "idUsuario", titulo: "Id usuário"},
+            {chave:"nomeUsuario", titulo: "Nome"},
+            {chave:"nomeRecurso", titulo: "Recurso"},
+            {chave:"nomeStatus", titulo:"Status"},
+            {chave:"dataInicial", titulo:"Início"},
+            {chave:"dataFinal", titulo:"fim"},
+            {chave:"horaInicial", titulo:"Das"},
+            {chave:"horaFinal", titulo:"Até"},
+            {chave: "dtCriacao", titulo:"Reservada"},
+          ]}
+          linhas={reserva}
+          />
+
         </main>
     </div>
   );

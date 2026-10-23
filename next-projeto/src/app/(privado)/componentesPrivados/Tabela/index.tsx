@@ -9,11 +9,13 @@ export function Tabela({titulo, colunas, linhas}:TabelaProps){
             <h1>{titulo}</h1>
             <table>
                 <thead>
+                    <tr>
                     {
                         colunas.map((info)=>{
                             return <th key={info.chave}>{info.titulo}</th>
                         })
                     }
+                    </tr>
                 </thead>
                 <tbody>
                     {
