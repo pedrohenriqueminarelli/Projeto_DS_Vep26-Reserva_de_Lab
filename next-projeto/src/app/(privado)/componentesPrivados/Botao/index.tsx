@@ -1,6 +1,6 @@
 interface BotaoProps{
     type?:"submit"|"button"|"reset";
-    onClick: () => void;
+    onClick?: () => void;
     texto:string;
 }
 

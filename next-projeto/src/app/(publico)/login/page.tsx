@@ -1,5 +1,31 @@
-import styles from ".login.module.css";
-export default function Login(){
+"use client"
+import { useState } from "react";
+import { Campo } from "../../(privado)/componentesPrivados/Campo";
+import { Botao } from "../../(privado)/componentesPrivados/Botao";
+export default function Login(){ 
+
+    const [dados, setDados] = useState ({email:"", senha:""});
+
+    function handleChange(event: React.ChangeEvent<HTMLInputElement>){
+        setDados({...dados, [event.target.name]: event.target.value});
+    }
+    
+    async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>){
+        event.preventDefault();
+        await fetch("http://localhost:8080/auth/login",{
+            method:"POST",
+            headers:{'content-type':'application/json'},
+            body:JSON.stringify(dados)
+        }).then(resultado=>{
+            if(!resultado.ok){
+                alert("falha ao se conectar")
+                return
+            }else{}
+        }).catch((erro)=>{
+            alert("Erro ao conectar ao BD")
+        })
+    }
+
      return (
     <div className="min-h-screen flex items-center justify-center bg-white">
         <div className="max-w-md mx-auto mt-10 p-6 bg-red-100 shadow-md rounded-md">
@@ -9,24 +35,26 @@ export default function Login(){
             Insira os seu dados!
             </div>
     
-        <form>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                Email:
-                <input className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
-                    type="email"
-                    name="email"/>
-                </label>
-
-                <label className="block text-sm font-medium text-gray-700">
-                Senha:
-                <input className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
-                    type="password"
-                    name="senha"/>
-                </label>
+        <form onSubmit={handleSubmit}>
+                <Campo
+                label="Email:"
+                name="email"
+                value={dados.email}
+                onChange={handleChange}
+                type="text"
+                />
+                <Campo 
+                label="Senha:"
+                name="senha"
+                value={dados.senha}
+                onChange={handleChange}
+                type="password"
+                />
                 <br></br>
-                <button type="submit" className="w-full bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 transition duration-200">
-                Enviando Dados
-                </button>
+                <Botao
+                type="submit"
+                texto="Logar"
+                />
             </form>
         </div>
     </div>
