@@ -31,7 +31,7 @@ export default function todasAsReservas(){
     useEffect(()=>{
       fetch(`${API}/reservas/detalhadas`).then((resultado)=> resultado.json()).then((dados)=> setReservas(dados));
       fetch(`${API}/recursos`).then((resultado)=> resultado.json()).then((dados)=> setRecurso(dados));
-      fetch(`${API}/status`).then((resultado)=> resultado.json()).then((dados)=>setStatus(dados));
+      fetch(`${API}/reservas/status`).then((resultado)=> resultado.json()).then((dados)=>setStatus(dados));
     },[])
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>){
