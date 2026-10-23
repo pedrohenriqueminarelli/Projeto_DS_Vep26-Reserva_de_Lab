@@ -85,5 +85,14 @@ class Reserva{
             throw new Error(`Erro na consulta ao BD, ${erro}`)
         }
     }
+    static async pegarStatus(){
+        try{
+            const conexao= await conectaBD();
+            const result = await conexao.query`SELECT codStatus, nome FROM RSVLAB.status WHERE codStatus!=1`
+            return result.recordset
+        }catch(erro){
+            throw new Error(`Erro na consulta ao BD, ${erro}`)
+        }
+    }
 }
 export default Reserva;

@@ -21,7 +21,7 @@ type Reservas = {
      const API= "http://localhost:8080"
 
      type Recurso={codRecurso:number; nome: string};
-     type Status= {codstatus: number; nome:string }
+     type Status= {codStatus: number; nome:string }
 export default function todasAsReservas(){
    
     const [reservas, setReservas] = useState<Reservas[]>([]);
@@ -72,7 +72,7 @@ export default function todasAsReservas(){
             name="codStatus"
             value={filtros.codStatus}
             onChange={handleChange}
-            opcoes={status.map((s)=>({valor:String(s.codstatus),texto: s.nome}))}
+            opcoes={status.map((s)=>({valor:String(s.codStatus),texto: s.nome}))}
             textOption="Selecione o Status!"
             />
             <Campo
