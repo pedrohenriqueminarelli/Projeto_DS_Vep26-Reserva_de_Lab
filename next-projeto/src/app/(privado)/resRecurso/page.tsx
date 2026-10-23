@@ -165,7 +165,7 @@ export default function reserva() {
       carregarHora();
       const id = setInterval(carregarHora, 60000); // atualiza a cada minuto
       return () => clearInterval(id);
-    })
+    },[])
 
     useEffect(() => {
       async function carregarReservas() {
@@ -203,6 +203,7 @@ export default function reserva() {
       return horarios.filter((hora) => {
         const slot = paraMinutos(dadosReserva.dataInicial, hora);
 
+        if (hora>="22:00") return false;
         if (slot<=agoraEmMinutos) return false;
 
         const ocupado = reservasDoRecurso.some(
@@ -211,7 +212,7 @@ export default function reserva() {
 
         return !ocupado;
       });
-    }, [reservasDoRecurso, dadosReserva.codRecurso, dadosReserva.dataInicial]);
+    }, [reservasDoRecurso, dadosReserva.codRecurso, dadosReserva.dataInicial, agoraEmMinutos]);
 
     const horariosFinaisDisponiveis = useMemo(() => {
       const { codRecurso, dataInicial, dataFinal, horaInicial } = dadosReserva;
