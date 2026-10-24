@@ -1,6 +1,9 @@
+"use client";
 import Link from "next/link";
 import styles from "../../../styles/header.module.css"
-
+  function apagarToken(){
+    localStorage.removeItem("token")
+  }
 export function Header(){
     return (
       <header className={styles.header}>
@@ -29,7 +32,7 @@ export function Header(){
               <Link href="/cadRecurso">Cadastrar Recurso</Link>
             </li>
             <li>
-              <Link href="/">sair</Link>
+              <Link href="/" onClick={apagarToken}>sair</Link>
             </li>
           </ul>
         </nav>
