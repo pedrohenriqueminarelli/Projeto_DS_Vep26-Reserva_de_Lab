@@ -22,7 +22,7 @@ class reservaController{
 
     static async inserirReserva(req, res){
 
-        const NovaReserva= { ...req.body, idUsuario: req.idUsuario };
+        const NovaReserva= { ...req.body, idUsuario: req.idUsuario  };
         try{
             const conflito = await Reserva.verificadorDeConflito(NovaReserva);
             if(conflito.length>0){

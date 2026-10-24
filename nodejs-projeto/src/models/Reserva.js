@@ -59,7 +59,7 @@ class Reserva{
     static async verificaOcorrenciaDeTempo(reserva){
         try{
             const conexao = await conectaBD();
-            const result = await conexao.query`SELECT CASE WHEN CONVERT(DATETIME, ${reserva.dataInicial} + 'T' + ${reserva.horaInicial}, 126) <= GETDATE() THEN 1 ELSE 0 END AS passado`;
+            const result = await conexao.query`SELECT CASE WHEN CONVERT(DATETIME, ${reserva.dataInicial} + 'T' + ${reserva.horaInicial} + ':00', 126) <= GETDATE() THEN 1 ELSE 0 END AS passado`;
             return result.recordset[0];
         }
         catch(erro){
