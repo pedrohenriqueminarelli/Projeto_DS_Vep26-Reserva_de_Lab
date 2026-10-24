@@ -1,37 +1,38 @@
 import Link from "next/link";
+import styles from "../../../styles/header.module.css"
 
 export function Header(){
     return (
-    <header className="flex px-2 py-4 bg-indigo-900 text-white">
-      <div className="flex items-center justify-between w-full mx-auto max-w-3xl">
-        <div className="flex px-2 py-4 text-white">
-          <h1 className="text-center font-bold m-2 text-2xl">
-            Reserva de Recursos
-          </h1>
+      <header className={styles.header}>
+        <div>
+          <div>
+            <h1 className={styles.h1}>
+              Reserva de Recursos
+            </h1>
+          </div>
         </div>
-      </div>
-      <nav>
-        <ul className="flex items-center justify-center gap-10 px-2 py-7">
-          <li>
-            <Link href="/home">Home</Link>
-          </li>
-          <li>
-            <Link href="/tReservas">reservas</Link>
-          </li>
-          <li>
-            <Link href="/mReserva">Minhas Reservas</Link>
-          </li>
-          <li>
-            <Link href="/resRecurso">Reservar</Link>
-          </li>
-          <li>
-            <Link href="/cadRecurso">Cadastrar Recurso</Link>
-          </li>
-          <li>
-            <Link href="/">sair</Link>
-          </li>
-        </ul>
-      </nav>
-    </header>
-  );
+        <nav>
+          <ul className={styles.nav}>
+            <li>
+              <Link href="/home">Home</Link>
+            </li>
+            <li>
+              <Link href="/tReservas">Reservas</Link>
+            </li>
+            <li>
+              <Link href="/mReserva">Minhas Reservas</Link>
+            </li>
+            <li>
+              <Link href="/resRecurso">Reservar</Link>
+            </li>
+            <li>
+              <Link href="/cadRecurso">Cadastrar Recurso</Link>
+            </li>
+            <li>
+              <Link href="/">sair</Link>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    );
 }

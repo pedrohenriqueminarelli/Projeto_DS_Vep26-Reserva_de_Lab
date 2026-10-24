@@ -1,4 +1,6 @@
 "use client";
+import body from "../../styles/corpo.module.css"
+import styles from "../../styles/form.module.css"
 import { useState } from "react";
 interface DadosDoUsuario{
     nome:       string;
@@ -38,18 +40,18 @@ export default function Cadusuario() {
     }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="max-w-md mx-auto mt-10 p-6 bg-red-100 shadow-md rounded-md">
-        <h2 className="text-2xl font-semibold mb-2">Formulário de Cadastro</h2>
+    <div className={body.corpo}>
+        <div className={styles.form}>
+        <h2 className={styles.h2}>Formulário de Cadastro</h2>
 
-            <div className="font-medium mb-4">
+            <div className={styles.h3}>
             Insira os dados de usuario!
             </div>
     
         <form onSubmit={handleSubmit}>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className={styles.label}>
                 Nome completo:
-                <input className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
+                <input className={styles.campo} placeholder="insira seu nome completo..."
                     type="text"
                     name="nome"
                     value={dados.nome}
@@ -58,9 +60,9 @@ export default function Cadusuario() {
                     />
                 </label>
 
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className={styles.label}>
                 E-mail para contato:
-                <input className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
+                <input className={styles.campo} placeholder="Insira seu e-mail pessoal..."
                     type="email"
                     name="email"
                     value={dados.email}
@@ -68,36 +70,36 @@ export default function Cadusuario() {
                     required/>
                 </label>
 
-                <label className="block text-sm font-medium text-gray-700">
+                <label className={styles.label}>
                 Senha:
-                <input className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
+                <input className={styles.campo} placeholder="Insira sua senha..."
                     type="password"
                     name="senha"
                     value={dados.senha}
                     onChange={handleChange}
                     required/>
                 </label>
-                <label className="mt-2 block text-sm font-medium text-gray-700">
+                <label className={styles.label}>
                 Data de Nascimento:
-                <input className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
+                <input className={styles.campo}
                     type="date"
                     name="nascimento"
                     value={dados.nascimento}
                     onChange={handleChange}
                     required/>
                 </label>
-                <label className="mt-2 block text-sm font-medium text-gray-700">
+                <label className={styles.label}>
                 Número de celular:
-                <input className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
+                <input className={styles.campo} placeholder="Insira seu número de telefone por extenso..."
                     type="tel"
                     name="celular"
                     value={dados.celular}
                     onChange={handleChange}
                     required/>
                 </label>
-                <label className="mt-2 block text-sm font-medium text-gray-700">
+                <label className={styles.label}>
                     CPF:
-                    <input className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
+                    <input className={styles.campo} placeholder="Insira seu CPF por extenso..."
                     type="text"
                     name="cpf"
                     value={dados.cpf}
@@ -106,7 +108,7 @@ export default function Cadusuario() {
                     />
                 </label>
                 <br></br>
-                <button type="submit" className="w-full bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 transition duration-200">
+                <button type="submit" className={styles.botao}>
                 Enviando Dados
                 </button>
             </form>

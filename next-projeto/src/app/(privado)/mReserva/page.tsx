@@ -1,4 +1,5 @@
 "use client";
+import styles from "../../styles/corpo.module.css"
 import { useState, useEffect } from "react";
 import { Tabela } from "../componentesPrivados/Tabela" 
 type Reservas = {
@@ -25,10 +26,10 @@ export default function reserva() {
       },[])
   return (
     <div>
-      <main className="flex flex-1 w-full flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
+      <main className={styles.corpo}>
+        <div className={styles.h1}>
           <h1>
-              Minhas reservas!
+              Minhas reservas !
             </h1>
           </div>
           <Tabela

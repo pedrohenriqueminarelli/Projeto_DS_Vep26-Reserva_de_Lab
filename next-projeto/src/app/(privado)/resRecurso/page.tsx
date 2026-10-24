@@ -1,5 +1,7 @@
 "use client";
 
+import body from "../../styles/corpo.module.css"
+import styles from "../../styles/form.module.css"
 import React, { useEffect, useMemo, useState } from "react";
 interface DadosDaReserva{
     idUsuario:          string;
@@ -73,7 +75,7 @@ export default function reserva() {
 
     const [dadosReserva, setDadosReserva]= useState<DadosDaReserva>({
         idUsuario:     "15",
-        codStatus:      "4",
+        codStatus:       "",
         codRecurso:      "",
         dataInicial:     "",
         dataFinal:       "",
@@ -118,7 +120,7 @@ export default function reserva() {
           throw new Error(`HTTP ${resp.status} - ${corpo}`);
         }
         alert("Reserva feita com sucesso!");
-        setDadosReserva({ idUsuario: "15", codStatus: "4", codRecurso: "", dataInicial: "", dataFinal: "", horaInicial: "", horaFinal: "" });
+        setDadosReserva({ idUsuario: "15", codStatus: "", codRecurso: "", dataInicial: "", dataFinal: "", horaInicial: "", horaFinal: "" });
       } catch (erro) {
         console.error("Erro:", erro);
         alert("Erro ao salvar a reserva: " + (erro as Error).message);
@@ -234,23 +236,23 @@ export default function reserva() {
     }, [reservasDoRecurso, dadosReserva.codRecurso, dadosReserva.dataInicial, dadosReserva.dataFinal, dadosReserva.horaInicial]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="mx-auto mt-10 p-6 bg-red-100 shadow-md rounded-md">
-        <h2 className="text-2xl font-semibold mb-2">Reserva de Recurso</h2>
+    <div className={body.corpo}>
+        <div className={styles.form}>
+        <h2 className={styles.h2}>Reserva de Recurso</h2>
 
-            <div className="font-medium mb-4">
+            <div className={styles.h3}>
             Marque sua reserva!
             </div>
     
             <form onSubmit={handleSubmit}>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className={styles.label}>
               Recurso:
-              <select className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
+              <select className={styles.campo}
                   name="codRecurso"
                   value={dadosReserva.codRecurso}
                   onChange={handleChange}
                   required>
-                  <option value="" disabled>Selecione o Recurso</option>
+                  <option value="" disabled>Selecione o Recurso...</option>
                   {dadosRecurso.map((registro) => (
                     <option key={registro.codRecurso} value={registro.codRecurso}>
                       {registro.nome}
@@ -260,9 +262,31 @@ export default function reserva() {
               </select>
               </label>
 
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className={styles.label}>
+              Finalidade:
+              <select className={styles.campo}
+                  name="codStatus"
+                  value={dadosReserva.codStatus}
+                  onChange={handleChange}
+                  required>
+                  <option value="" disabled>
+                    Selecione o motivo do agendamento...
+                  </option>
+                  <option value="2">
+                    Ocupação do Recurso
+                  </option>
+                  <option value="3">
+                    Bloqueio do Recurso
+                  </option>
+                  <option value="4">
+                    Reserva do Recurso
+                  </option>
+              </select>
+              </label>
+
+              <label className={styles.label}>
               Data Inicial:
-              <input className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
+              <input className={styles.campo}
                   type="date"
                   name="dataInicial"
                   min={agora?.data}
@@ -271,9 +295,9 @@ export default function reserva() {
                   required/>
               </label>
 
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className={styles.label}>
               Data Final:
-              <input className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
+              <input className={styles.campo}
                   type="date"
                   name="dataFinal"
                   min={dadosReserva.dataInicial || agora?.data}
@@ -282,9 +306,9 @@ export default function reserva() {
                   required/>
               </label>
 
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className={styles.label}>
               Hora Inicial:
-              <select className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
+              <select className={styles.campo}
                   name="horaInicial"
                   value={dadosReserva.horaInicial}
                   onChange={handleChange}
@@ -294,7 +318,7 @@ export default function reserva() {
                     {!agora
                       ? "Carregando horário do servidor..."
                       : !dadosReserva.codRecurso || !dadosReserva.dataInicial
-                      ? "Escolha o recurso e a data primeiro"
+                      ? "Escolha o recurso e a data primeiro..."
                       : horariosIniciaisDisponiveis.length === 0
                       ? "Nenhum horário disponível"
                       : "Selecione o Horario inicial"}
@@ -307,9 +331,9 @@ export default function reserva() {
               </select>
               </label>
 
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className={styles.label}>
               Hora final:
-              <select className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
+              <select className={styles.campo}
                   name="horaFinal"
                   value={dadosReserva.horaFinal}
                   onChange={handleChange}
@@ -317,7 +341,7 @@ export default function reserva() {
                   required>
                   <option value="" disabled>
                     {!dadosReserva.horaInicial || !dadosReserva.dataFinal
-                      ? "Escolha a hora inicial primeiro"
+                      ? "Escolha a hora inicial primeiro..."
                       : horariosFinaisDisponiveis.length === 0
                       ? "Nenhum horário disponível"
                       : "Selecione o Horario Final"}
@@ -331,7 +355,7 @@ export default function reserva() {
 
               </label>
               <br></br>
-              <button type="submit" className="w-full bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 transition duration-200">
+              <button type="submit" className={styles.botao}>
               Enviando Dados
               </button>
             </form>

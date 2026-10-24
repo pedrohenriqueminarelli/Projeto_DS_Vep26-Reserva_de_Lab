@@ -1,0 +1,27 @@
+.corpo {
+    background-color: rgba(14, 14, 19, 0.8);
+    padding: 50px;
+    font-size: 20px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.h1 {
+    font-size: 30px;
+    font: bold;
+    text-align: center;
+    font-family:monospace;
+    margin-bottom: 20px;
+}
+
+.h3 {
+    margin-bottom: 10px;
+    font-size: 25px;
+    margin-top: 30px;
+    margin-left: 40px;
+}
+
+.hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

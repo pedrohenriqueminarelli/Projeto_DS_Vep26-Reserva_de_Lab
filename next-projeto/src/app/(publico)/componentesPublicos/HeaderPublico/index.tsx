@@ -1,22 +1,23 @@
 import Link from "next/link";
+import styles from "../../../styles/header.module.css"
 
 export function HeaderPublico(){
     return (
-      <header className="flex px-2 py-4 bg-indigo-900 text-white">
-        <div className="flex items-center justify-between w-full mx-auto max-w-3xl">
-          <div className="flex px-2 py-4 text-white">
-            <h1 className="text-center font-bold m-2 text-2xl">
+      <header className={styles.header}>
+        <div>
+          <div>
+            <h1 className={styles.h1}>
               Reserva de Recursos
             </h1>
           </div>
         </div>
         <nav>
-          <ul className="flex items-center justify-center gap-10 px-2 py-7">
+          <ul className={styles.nav}>
             <li>
               <Link href="/">Home</Link>
             </li>
             <li>
-              <Link href="/login">login</Link>
+              <Link href="/login">Login</Link>
             </li>
             <li>
               <Link href="/cadUsuario">Cadastro</Link>

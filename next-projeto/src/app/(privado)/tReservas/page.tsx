@@ -1,4 +1,5 @@
 "use client";
+import body from "../../styles/corpo.module.css"
 import { Tabela } from "../componentesPrivados/Tabela";
 import { Select } from "../componentesPrivados/Select";
 import { Campo } from "../componentesPrivados/Campo";
@@ -53,7 +54,7 @@ export default function todasAsReservas(){
 
     return(
         <div>
-      <main className="flex flex-1 w-full flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+      <main className={body.corpo}>
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
           <h1>
               Todas as reservas!

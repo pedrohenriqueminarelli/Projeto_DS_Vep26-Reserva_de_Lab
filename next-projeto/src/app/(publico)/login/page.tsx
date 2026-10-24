@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { Campo } from "../../(privado)/componentesPrivados/Campo";
 import { Botao } from "../../(privado)/componentesPrivados/Botao";
+import body from "../../styles/corpo.module.css"
+import styles from "../../styles/form.module.css"
 import { useRouter } from "next/navigation";
 export default function Login(){ 
 
@@ -34,11 +36,11 @@ export default function Login(){
     }
 
      return (
-    <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="max-w-md mx-auto mt-10 p-6 bg-red-100 shadow-md rounded-md">
-        <h2 className="text-2xl font-semibold mb-2">Faça o seu Login</h2>
+    <div className={body.corpo}>
+        <div className={styles.form}>
+        <h2 className={styles.h2}>Faça o seu Login</h2>
 
-            <div className="font-medium mb-4">
+            <div className={styles.h3}>
             Insira os seu dados!
             </div>
     

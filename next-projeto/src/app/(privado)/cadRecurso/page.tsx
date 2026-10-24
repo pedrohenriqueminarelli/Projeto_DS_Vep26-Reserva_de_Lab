@@ -1,5 +1,7 @@
 "use client";
 
+import body from "../../styles/corpo.module.css"
+import styles from "../../styles/form.module.css"
 import React, { useState } from "react";
 interface DadosDoRecurso{
     nome:        string;
@@ -35,18 +37,18 @@ export default function CadRecurso() {
     }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="mx-auto mt-10 p-6 bg-red-100 shadow-md rounded-md">
-        <h2 className="text-2xl font-semibold mb-2">Formulário de Cadastro</h2>
+    <div className={body.corpo}>
+        <div className={styles.form}>
+        <h2 className={styles.h2}>Formulário de Cadastro</h2>
 
-            <div className="font-medium mb-4">
+            <div className={styles.h3}>
             Insira os dados do recurso!
             </div>
     
         <form onSubmit={handleSubmit}>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className={styles.label}>
                 Nome do Recurso:
-                <input className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
+                <input className={styles.campo} placeholder="Qual o nome/número do recurso..."
                     type="text"
                     name="nome"
                     value={dados.nome}
@@ -54,9 +56,9 @@ export default function CadRecurso() {
                     required/>
                 </label>
 
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className={styles.label}>
                 Capacidade:
-                <input className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
+                <input className={styles.campo} placeholder="Informe a capacidade máxima..."
                     type="text"
                     name="capacidade"
                     value={dados.capacidade}
@@ -64,29 +66,29 @@ export default function CadRecurso() {
                     required/>
                 </label>
 
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className={styles.label}>
                 Localização:
-                <input className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
+                <input className={styles.campo} placeholder="Especifique a localização..."
                     type="text"
                     name="localizacao"
                     value={dados.localizacao}
                     onChange={handleChange}
                     required/>
                 </label>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className={styles.label}>
                 Tipo:
-                <select className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200"
+                <select className={styles.campo}
                     name="tipo"
                     value={dados.tipo}
                     onChange={handleChange}
                     required>
-                    <option value="" disabled>Selecione o tipo</option>
+                    <option value="" disabled>Selecione o tipo...</option>
                     <option value="laboratorio">Laboratório</option>
                     <option value="sala">Sala</option>
                 </select>
                 </label>
                 <br></br>
-                <button type="submit" className="w-full bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 transition duration-200">
+                <button type="submit" className={styles.botao}>
                 Enviando Dados
                 </button>
             </form>

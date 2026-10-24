@@ -1,3 +1,5 @@
+import styles from "../../../styles/form.module.css"
+
 interface SelectProps{
     textOption:string;
     label: string;
@@ -13,7 +15,7 @@ export function Select({label, name, value, required=false, onChange, opcoes, te
         <label className="block text-sm font-medium text-gray-700 mb-2" >
             {label}
             <select name={name} value={value} onChange={onChange} required={required}
-            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:bg-red-400 bg-red-100 transition duration-200">
+            className={styles.campo}>
                  <option value="" disabled>{textOption}</option>
                 {
                     opcoes.map((opcao)=>{
