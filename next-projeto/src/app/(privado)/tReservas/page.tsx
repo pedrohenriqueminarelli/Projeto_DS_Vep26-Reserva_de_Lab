@@ -30,9 +30,19 @@ export default function todasAsReservas(){
     const [status, setStatus] = useState<Status[]>([]);
     const [filtros, setFiltros] = useState({codRecurso: "", codStatus: "",data: "" });
     useEffect(()=>{
-      fetch(`${API}/reservas/detalhadas`).then((resultado)=> resultado.json()).then((dados)=> setReservas(dados));
-      fetch(`${API}/recursos`).then((resultado)=> resultado.json()).then((dados)=> setRecurso(dados));
-      fetch(`${API}/reservas/status`).then((resultado)=> resultado.json()).then((dados)=>setStatus(dados));
+      fetch(`${API}/reservas/detalhadas`,{
+        method:"GET",
+        headers:{Authorization: `Bearer ${localStorage.getItem("token")}`}
+      }).then((resultado)=> resultado.json()).then((dados)=> setReservas(dados));
+      fetch(`${API}/recursos`, {
+        method:"GET",
+        headers:{Authorization: `Bearer ${localStorage.getItem("token")}`}
+      }).then((resultado)=> resultado.json()).then((dados)=> setRecurso(dados));
+      fetch(`${API}/reservas/status`, {
+        method:"GET",
+        headers:{Authorization: `Bearer ${localStorage.getItem("token")}`}
+      }
+      ).then((resultado)=> resultado.json()).then((dados)=>setStatus(dados));
     },[])
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>){

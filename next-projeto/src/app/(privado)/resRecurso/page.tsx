@@ -111,7 +111,7 @@ export default function reserva() {
       try {
         const resp = await fetch("http://localhost:8080/reservas", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json",Authorization: `Bearer ${localStorage.getItem("token")}`},
           body: JSON.stringify(dadosReserva),
         });
 

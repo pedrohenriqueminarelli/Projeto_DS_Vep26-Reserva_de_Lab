@@ -25,7 +25,7 @@ export default function CadRecurso() {
         event.preventDefault();
         await fetch("http://localhost:8080/recursos",{
             method:"POST",
-            headers:{'content-type':'application/json'},
+            headers:{'content-type':'application/json', Authorization: `Bearer ${localStorage.getItem("token")}`},
             body:JSON.stringify(dados)
         }).then(dado =>{
             if(!dado.ok) throw new Error ("Erro ao conectar ao BD!");

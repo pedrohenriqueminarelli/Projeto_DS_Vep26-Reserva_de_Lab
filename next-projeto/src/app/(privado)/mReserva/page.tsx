@@ -20,9 +20,11 @@ type Reservas = {
 export default function reserva() {
       const [reserva, setReserva] = useState<Reservas[]>([]);
 
-      const id = 15
       useEffect(()=>{
-        fetch(`${API}/reservas/${id}`).then((resultado)=> resultado.json()).then((dados)=> setReserva(dados));
+        fetch(`${API}/reservas/minhas`,{
+          method: "GET",
+          headers:{Authorization: `Bearer ${localStorage.getItem("token")}`}
+        }).then((resultado)=> resultado.json()).then((dados)=> setReserva(dados));
       },[])
   return (
     <div>
