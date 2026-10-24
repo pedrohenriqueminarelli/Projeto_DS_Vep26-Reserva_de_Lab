@@ -22,7 +22,7 @@ class reservaController{
 
     static async inserirReserva(req, res){
 
-        const NovaReserva= req.body;
+        const NovaReserva= { ...req.body, idUsuario: req.idUsuario };
         try{
             const conflito = await Reserva.verificadorDeConflito(NovaReserva);
             if(conflito.length>0){
@@ -30,7 +30,7 @@ class reservaController{
             }
             const check = await Reserva.verificaOcorrenciaDeTempo(NovaReserva);
             if (check.passado === 1) {
-                return res.status(400).json({ erro: "Não é possível reservar em horário que já passou" });
+                return res.status(400).json({ message: "Não é possível reservar em horário que já passou" });
             }
             await Reserva.inserirReserva(NovaReserva);
             res.status(201).json({ message: "Reserva feita com sucesso!"})

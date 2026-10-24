@@ -4,7 +4,6 @@ import body from "../../styles/corpo.module.css"
 import styles from "../../styles/form.module.css"
 import React, { useEffect, useMemo, useState } from "react";
 interface DadosDaReserva{
-    idUsuario:          string;
     codStatus:          string;
     codRecurso:         string;
     dataInicial:        string;
@@ -74,7 +73,6 @@ export default function reserva() {
     const [dadosRecurso, setDadosRecurso]= useState<DadosDoRecurso[]>([]);
 
     const [dadosReserva, setDadosReserva]= useState<DadosDaReserva>({
-        idUsuario:     "15",
         codStatus:       "",
         codRecurso:      "",
         dataInicial:     "",
@@ -120,7 +118,7 @@ export default function reserva() {
           throw new Error(`HTTP ${resp.status} - ${corpo}`);
         }
         alert("Reserva feita com sucesso!");
-        setDadosReserva({ idUsuario: "15", codStatus: "", codRecurso: "", dataInicial: "", dataFinal: "", horaInicial: "", horaFinal: "" });
+        setDadosReserva({codStatus: "", codRecurso: "", dataInicial: "", dataFinal: "", horaInicial: "", horaFinal: "" });
       } catch (erro) {
         console.error("Erro:", erro);
         alert("Erro ao salvar a reserva: " + (erro as Error).message);
@@ -130,7 +128,10 @@ export default function reserva() {
     async function carregarHora()
     {
       try {
-        const response = await fetch("http://localhost:8080/hora");
+        const response = await fetch("http://localhost:8080/hora", {
+          method:"GET",
+          headers:{Authorization: `Bearer ${localStorage.getItem("token")}`}
+        });
         if (!response.ok) throw new Error("Erro ao buscar a hora do servidor");
         const resultado: HoraServidor = await response.json();
         setAgora(resultado);
@@ -145,7 +146,10 @@ export default function reserva() {
       {
         try 
         {
-          const response = await fetch("http://localhost:8080/recursos")
+          const response = await fetch("http://localhost:8080/recursos",{
+            method:"GET",
+            headers:{Authorization: `Bearer ${localStorage.getItem("token")}`}
+          })
           if (!response.ok)
           {
             throw new Error("Erro ao trazer os dados de TODOS os recursos do BD");
@@ -172,7 +176,10 @@ export default function reserva() {
     useEffect(() => {
       async function carregarReservas() {
         try {
-          const response = await fetch("http://localhost:8080/reservas");
+          const response = await fetch("http://localhost:8080/reservas",{
+            method:"GET",
+            headers:{Authorization: `Bearer ${localStorage.getItem("token")}`}
+          });
           if (!response.ok) throw new Error("Erro ao trazer as reservas do BD");
           const resultados: ReservaExistente[] = await response.json();
           setReservasExistentes(resultados);
