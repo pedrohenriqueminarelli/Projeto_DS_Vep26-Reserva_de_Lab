@@ -1,11 +1,21 @@
 LISTA DE AFAZERES
 
+PRIMEIRA ENTREGA
+1 - REACT - Criação do REACT - joão
+2 - REACT - Cadastro de Usuário - pedro
+3 - REACT - Cadastro de Recurso - pedro
+4 - NODE - Criação do NODE - joão
+5 - NODE - Node de Usuario - joão
+6 - NODE - Node de Recurso - joão
+
+
 SEGUNDA ENTREGA
 
 1 - REACT - Tela principal - pedro
 2 - REACT - Tela para reserva de recursos - joão
 3 - REACT - Tela para minhas reservas - joão
 4 - REACT/NODE - Tela de consulta de reserva por data, usuário e recurso - pedro
+5 - NODE - Node de Reserva - pedro
 
 TERCEIRA ENTREGA
 
