@@ -22,7 +22,7 @@ type Reservas = {
      const API= "http://localhost:8080"
 
      type Recurso={codRecurso:number; nome: string};
-     type Status= {codStatus: number; nome:string }
+     type Status= {codStatus: number; nome:string };
 export default function todasAsReservas(){
    
     const [reservas, setReservas] = useState<Reservas[]>([]);
@@ -66,7 +66,7 @@ export default function todasAsReservas(){
         <div>
       <main className={body.corpo}>
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1>
+          <h1 className={body.h1}>
               Todas as reservas!
             </h1>
           <div className="grid gap-4 sm:grid-cols-4 items-end">
@@ -76,7 +76,7 @@ export default function todasAsReservas(){
             value={filtros.codRecurso}
             onChange={handleChange}
             opcoes={recurso.map((r)=>({valor: String(r.codRecurso), texto: r.nome}))}
-            textOption="Selecione o recurso! "
+            textOption="Selecione o recurso..."
             />
             <Select
             label="Escolha o status da Reserva"
@@ -84,7 +84,7 @@ export default function todasAsReservas(){
             value={filtros.codStatus}
             onChange={handleChange}
             opcoes={status.map((s)=>({valor:String(s.codStatus),texto: s.nome}))}
-            textOption="Selecione o Status!"
+            textOption="Selecione o Status..."
             />
             <Campo
             label="Data:"

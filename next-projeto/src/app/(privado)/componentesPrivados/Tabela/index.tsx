@@ -1,3 +1,5 @@
+import styles from "../../../styles/table.module.css"
+
 interface TabelaProps{
     titulo?:string;
     colunas: {chave:string; titulo: string}[];
@@ -5,14 +7,14 @@ interface TabelaProps{
 }
 export function Tabela({titulo, colunas, linhas}:TabelaProps){
     return(
-        <div>
+        <div className={styles.table}>
             <h1>{titulo}</h1>
             <table>
                 <thead>
                     <tr>
                     {
                         colunas.map((info)=>{
-                            return <th key={info.chave}>{info.titulo}</th>
+                            return <th className={styles.th} key={info.chave}>{info.titulo}</th>
                         })
                     }
                     </tr>

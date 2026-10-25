@@ -12,7 +12,7 @@ interface SelectProps{
 
 export function Select({label, name, value, required=false, onChange, opcoes, textOption}:SelectProps){
     return(
-        <label className="block text-sm font-medium text-gray-700 mb-2" >
+        <label className={styles.label}>
             {label}
             <select name={name} value={value} onChange={onChange} required={required}
             className={styles.campo}>

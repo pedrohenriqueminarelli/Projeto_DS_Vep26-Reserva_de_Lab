@@ -29,8 +29,8 @@ export default function reserva() {
   return (
     <div>
       <main className={styles.corpo}>
-        <div className={styles.h1}>
-          <h1>
+        <div>
+          <h1 className={styles.h1}>
               Minhas reservas !
             </h1>
           </div>

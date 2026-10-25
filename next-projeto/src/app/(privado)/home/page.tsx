@@ -16,17 +16,17 @@ export default function home(){
           </ol>
           <h3 className={styles.h3}>O que você pode fazer?</h3>
           <ul>
-            <li>Home - Local onde fica as intruções e informações, caso você queira consultar novamente!</li>
+            <li><span className={styles.span}>Home -</span> Local onde fica as intruções e informações, caso você queira consultar novamente!</li>
             <hr className={styles.hr} />
-            <li>Reservas - Mostra todas as reservas que foram feitas e os status dos laboratório no momento.</li>
+            <li><span className={styles.span}>Reservas -</span> Mostra todas as reservas que foram feitas e os status dos laboratório no momento.</li>
             <hr className={styles.hr} />
-            <li>Minhas reservas - Consulte todas as suas reservas em um lugar só de forma prática e rápida.</li>
+            <li><span className={styles.span}>Minhas reservas -</span> Consulte todas as suas reservas em um lugar só de forma prática e rápida.</li>
             <hr className={styles.hr} />
-            <li>Reservar - Faça a reserva de um laboratório ou sala, basta preencher as informações necessárias.</li>
+            <li><span className={styles.span}>Reservar -</span> Faça a reserva de um laboratório ou sala, basta preencher as informações necessárias.</li>
             <hr className={styles.hr} />
-            <li>Cadastro de um novo recurso - Um novo recurso, é uma nova sala ou laboratório disponível para uso de todos. Essa funcionalidade só pode ser utilizada por pessoas autorizadas!</li>
+            <li><span className={styles.span}>Cadastro de um novo recurso -</span> Um novo recurso, é uma nova sala ou laboratório disponível para uso de todos. Essa funcionalidade só pode ser utilizada por pessoas autorizadas!</li>
             <hr className={styles.hr} />
-            <li>Sair - Saia da sua conta, caso queira usar uma outra conta.</li>
+            <li><span className={styles.span}>Sair -</span> Saia da sua conta, caso queira usar uma outra conta.</li>
           </ul>
           </div>
         </main>

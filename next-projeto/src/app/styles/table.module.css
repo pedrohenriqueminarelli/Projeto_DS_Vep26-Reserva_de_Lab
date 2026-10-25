@@ -1,0 +1,14 @@
+.table {
+    margin: auto;
+    text-align: center;
+    margin-top: 5vh;
+}
+
+.th {
+    color: white;
+    font-family: monospace;
+    font-size: 25px;
+    padding: 10px;
+    padding-left: 45px;
+    padding-right: 45px;
+}
