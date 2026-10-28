@@ -24,7 +24,7 @@ export default function Login(){
         })
         const resultado = await resposta.json();
         if(!resposta.ok){
-            alert(resultado.massage)
+            alert("Senha ou Email estão errados!")
             return
         }else{
             localStorage.setItem("token", resultado.token);
