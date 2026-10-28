@@ -1,7 +1,7 @@
 import styles from "../styles/corpo.module.css"
 
 export default function Home() {
-  return (
+     return (
     <div>
       <main className={styles.corpo}>
         <div>
@@ -11,8 +11,8 @@ export default function Home() {
           <p>Reserve seu laboratório e consulte reservas de onde quer que você esteja !</p>
           <h3 className={styles.h3}>Por onde começar?</h3>
           <ol>
-            <li>Faça seu cadastro - Coloque suas informações.</li>
-            <li>Faça o login - Para ter acesso as funcionalidades.</li>
+            <li><span className={styles.span}>Faça seu cadastro -</span> Coloque suas informações.</li>
+            <li><span className={styles.span}>Faça o login -</span> Para ter acesso as funcionalidades.</li>
           </ol>
           <h3 className={styles.h3}>O que você pode fazer?</h3>
           <ul>

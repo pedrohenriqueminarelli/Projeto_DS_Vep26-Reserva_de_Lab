@@ -3,20 +3,21 @@ import styles from "../../styles/corpo.module.css"
 import { useState, useEffect } from "react";
 import { Tabela } from "../componentesPrivados/Tabela" 
 type Reservas = {
-    idUsuario: number;
-    codStatus: number;
-    codRecurso:number;
-    codReserva:number;
+    idUsuario:   number;
+    codStatus:   number;
+    codRecurso:  number;
+    codReserva:  number;
     nomeUsuario: string;
-    nomeRecurso:string;
-    nomeStatus: string;
+    nomeRecurso: string;
+    nomeStatus:  string;
     dataInicial: string;
-    dataFinal: string;
+    dataFinal:   string;
     horaInicial: string;
-    horaFinal: string;
-    dtCriacao: string;
+    horaFinal:   string;
+    dtCriacao:   string;
 }
       const API = "http://localhost:8080"
+
 export default function reserva() {
       const [reserva, setReserva] = useState<Reservas[]>([]);
 
@@ -26,31 +27,37 @@ export default function reserva() {
           headers:{Authorization: `Bearer ${localStorage.getItem("token")}`}
         }).then((resultado)=> resultado.json()).then((dados)=> setReserva(dados));
       },[])
+
   return (
     <div>
       <main className={styles.corpo}>
-        <div>
-          <h1 className={styles.h1}>
-              Minhas reservas !
-            </h1>
-          </div>
-          <Tabela
-          colunas={[
-            {chave: "codReserva", titulo: "Reserva"},
-            {chave: "idUsuario", titulo: "Id usuário"},
-            {chave:"nomeUsuario", titulo: "Nome"},
-            {chave:"nomeRecurso", titulo: "Recurso"},
-            {chave:"nomeStatus", titulo:"Status"},
-            {chave:"dataInicial", titulo:"Início"},
-            {chave:"dataFinal", titulo:"fim"},
-            {chave:"horaInicial", titulo:"Das"},
-            {chave:"horaFinal", titulo:"Até"},
-            {chave: "dtCriacao", titulo:"Reservada"},
-          ]}
-          linhas={reserva}
-          />
 
-        </main>
+        {reserva.length > 0 ? (
+        <>
+          <div>
+            <h1 className={styles.h1}>Minhas reservas !</h1>
+          </div>
+
+          <Tabela
+            colunas={[
+              { chave: "codReserva", titulo: "Reserva" },
+              { chave: "idUsuario", titulo: "Id usuário" },
+              { chave: "nomeUsuario", titulo: "Nome" },
+              { chave: "nomeRecurso", titulo: "Recurso" },
+              { chave: "nomeStatus", titulo: "Status" },
+              { chave: "dataInicial", titulo: "Início" },
+              { chave: "dataFinal", titulo: "fim" },
+              { chave: "horaInicial", titulo: "Das" },
+              { chave: "horaFinal", titulo: "Até" },
+              { chave: "dtCriacao", titulo: "Reservada" },
+            ]}
+            linhas={reserva}
+          />
+        </>
+        ) : (
+          <h1 className={styles.h1}>Você ainda não possui nenhuma reserva!</h1>
+        )}
+      </main>
     </div>
   );
 }
