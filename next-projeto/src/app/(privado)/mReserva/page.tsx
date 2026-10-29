@@ -14,7 +14,7 @@ type Reservas = {
     dataFinal:   string;
     horaInicial: string;
     horaFinal:   string;
-    dtCriacao:   string;
+    dtCriacao:   string; 
 }
       const API = "http://localhost:8080"
 

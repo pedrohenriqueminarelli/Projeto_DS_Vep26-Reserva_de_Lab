@@ -4,6 +4,7 @@ interface TabelaProps{
     titulo?:string;
     colunas: {chave:string; titulo: string}[];
     linhas:Record<string, string| number>[];
+    acoes?:(linha: )
 }
 export function Tabela({titulo, colunas, linhas}:TabelaProps){
     return(
