@@ -51,7 +51,7 @@ export default function Login(){
                 value={dados.email}
                 onChange={handleChange}
                 type="email"
-                placeholder="Insira o email cadastrado..."
+                placeholder="Insira o seu email cadastrado..."
                 />
                 <Campo 
                 label="Senha:"
