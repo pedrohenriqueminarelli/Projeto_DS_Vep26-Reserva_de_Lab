@@ -1,3 +1,4 @@
+import Recurso from '../models/Recurso.js';
 import recurso from '../models/Recurso.js';
     
 class recursoController {
@@ -15,9 +16,9 @@ class recursoController {
     static async inserirRecurso (req, res) {
         const recursoNovo = req.body;
         try {
-            const ocorrencia= await verificadorDeOcorrencia(recursoNovo); 
+            const ocorrencia= await Recurso.verificadorDeOcorrenciaDeRecurso(recursoNovo); 
             if(ocorrencia.length>0){
-                return res.status(400).json({messege:"Já existe uma Reserva com esse nome!"})
+                return res.status(400).json({message:"Já existe uma Reserva com esse nome!"})
             }
             await recurso.inserirRecurso(recursoNovo);
             res.status(200).json({message: "Inserido com sucesso!"});

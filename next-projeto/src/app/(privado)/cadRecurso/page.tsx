@@ -28,11 +28,11 @@ export default function CadRecurso() {
             headers:{'content-type':'application/json', Authorization: `Bearer ${localStorage.getItem("token")}`},
             body:JSON.stringify(dados)
         }).then(dado =>{
-            if(!dado.ok) throw new Error ("Erro ao conectar ao BD!");
+            if(!dado.ok) throw new Error ("Já existe um recurso com esse nome!");
             alert("Recurso cadastrado com sucesso!");
             setDados({nome:"", capacidade:"", localizacao:"", tipo:""});
         }).catch((erro)=>{
-            alert("Erro ao conectar ao BD!")
+            alert("Já existe um recurso com esse nome!")
         })
     }
 

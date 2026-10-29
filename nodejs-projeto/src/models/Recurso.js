@@ -31,8 +31,8 @@ class Recurso{
     static async verificadorDeOcorrenciaDeRecurso(recurso){
         try{
             const conexao= await conectaBD();
-            const result= await conexao.query(`SELECT nome FROM RSVLAB.recurso where nome=${recurso.nome}`)
-            return result.recordset[0];
+            const result= await conexao.query`SELECT nome FROM RSVLAB.recurso where nome=${recurso.nome}`
+            return result.recordset;
         }catch(erro){
             throw new Error(`Erro ao conectar a BD: ${erro}`)
         }
