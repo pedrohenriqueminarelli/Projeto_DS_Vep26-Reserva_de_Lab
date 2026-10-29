@@ -26,7 +26,7 @@ class reservaController{
         try{
             const conflito = await Reserva.verificadorDeConflito(NovaReserva);
             if(conflito.length>0){
-                return res.status(409).json({message:"Já existe uma reserva feita nesse horário"})
+                return res.status(400).json({message:"Já existe uma reserva feita nesse horário"})
             }
             const check = await Reserva.verificaOcorrenciaDeTempo(NovaReserva);
             if (check.passado === 1) {

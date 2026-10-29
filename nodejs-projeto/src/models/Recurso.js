@@ -28,5 +28,14 @@ class Recurso{
             throw new Error(`Erro na consulta ao BD:${error}`);
         }
     }
+    static async verificadorDeOcorrenciaDeRecurso(recurso){
+        try{
+            const conexao= await conectaBD();
+            const result= await conexao.query(`SELECT nome FROM RSVLAB.recurso where nome=${recurso.nome}`)
+            return result.recordset[0];
+        }catch(erro){
+            throw new Error(`Erro ao conectar a BD: ${erro}`)
+        }
+    }
 }
 export default Recurso;

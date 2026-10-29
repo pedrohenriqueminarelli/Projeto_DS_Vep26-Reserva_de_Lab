@@ -15,6 +15,10 @@ class recursoController {
     static async inserirRecurso (req, res) {
         const recursoNovo = req.body;
         try {
+            const ocorrencia= await verificadorDeOcorrencia(recursoNovo); 
+            if(ocorrencia.length>0){
+                return res.status(400).json({messege:"Já existe uma Reserva com esse nome!"})
+            }
             await recurso.inserirRecurso(recursoNovo);
             res.status(200).json({message: "Inserido com sucesso!"});
         }
