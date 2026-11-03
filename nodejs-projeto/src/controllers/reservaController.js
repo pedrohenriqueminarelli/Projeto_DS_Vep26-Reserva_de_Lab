@@ -7,7 +7,7 @@ class reservaController{
             const todasAsReservas = await Reserva.buscarTodas();
             res.status(200).json(todasAsReservas);
         }catch(erro) {
-            res.status(500).json({message: `${erro} - falha na requisição!`})
+            res.status(500).json({message: `${erro} - falha na requisição!`});
         }
     }
 
@@ -16,7 +16,7 @@ class reservaController{
             const horariobd = await Reserva.horaAtual();
             res.status(200).json(horariobd);
         }catch(erro) {
-            res.status(500).json({message: `${erro} - falha na requisição!`})
+            res.status(500).json({message: `${erro} - falha na requisição!`});
         }
     }
 
@@ -33,9 +33,9 @@ class reservaController{
                 return res.status(400).json({ message: "Não é possível reservar em horário que já passou" });
             }
             await Reserva.inserirReserva(NovaReserva);
-            res.status(201).json({ message: "Reserva feita com sucesso!"})
+            res.status(201).json({ message: "Reserva feita com sucesso!"});
         }catch(erro){
-            res.status(500).json({message: `${erro} - Falha na requisição!`})
+            res.status(500).json({message: `${erro} - Falha na requisição!`});
         }
     }
     static async pegarOsDadosDaReserva(req, res){

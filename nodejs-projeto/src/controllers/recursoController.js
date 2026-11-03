@@ -1,5 +1,4 @@
 import Recurso from '../models/Recurso.js';
-import recurso from '../models/Recurso.js';
     
 class recursoController {
 
