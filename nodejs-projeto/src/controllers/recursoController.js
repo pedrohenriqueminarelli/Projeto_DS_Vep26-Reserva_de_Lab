@@ -4,10 +4,11 @@ class recursoController {
 
     static async buscarTodos (req, res) {
         try {
-            const buscarTodos = await recurso.buscarTodos();
+            const buscarTodos = await Recurso.buscarTodos();
             res.status(200).json(buscarTodos);
         }
         catch (error) {
+            console.error("ERRO buscarTodos:", error);
             res.status(500).json({message: `${error} - falha na requisição`});
         }
     }
@@ -19,7 +20,7 @@ class recursoController {
             if(ocorrencia.length>0){
                 return res.status(400).json({message:"Já existe uma Reserva com esse nome!"})
             }
-            await recurso.inserirRecurso(recursoNovo);
+            await Recurso.inserirRecurso(recursoNovo);
             res.status(200).json({message: "Inserido com sucesso!"});
         }
         catch (error) {
